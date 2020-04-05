@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>2017-06-06【iOS可重复用代码】清内存 | Hexo</title>
+  <title>2017-06-06【iOS今天小收获】使用MJExtension将JSON转Model要主要的细节 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="清内存123456789101112131415CGFloat size &#x3D; [SDImageCache sharedImageCache].getSize &#x2F; 1000.0 &#x2F; 1000;    if (size !&#x3D; 0) &amp;#123;        if (indexPath.section &#x3D;&#x3D; 2 &amp;&amp; inde">
+  <meta name="description" content="在用MJExtension将NSDictionary转成Model的过程中，要注意好多细节。但是其中最重要、最难以发现的问题是，Model中有一个object的数据类型是自定义的GFImage类型，当setValue运行到此处时，会crash并出现错误unrecognized selector sent to instance.  一般这个错误出现的原因是：在赋值之前，这个指针就被释放了。 本来是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2017-06-06【iOS可重复用代码】清内存">
-<meta property="og:url" content="http://yoursite.com/2017/06/06/2017-06-06-ios-code/index.html">
+<meta property="og:title" content="2017-06-06【iOS今天小收获】使用MJExtension将JSON转Model要主要的细节">
+<meta property="og:url" content="http://yoursite.com/2017/06/06/2017-06-06-ios/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="清内存123456789101112131415CGFloat size &#x3D; [SDImageCache sharedImageCache].getSize &#x2F; 1000.0 &#x2F; 1000;    if (size !&#x3D; 0) &amp;#123;        if (indexPath.section &#x3D;&#x3D; 2 &amp;&amp; inde">
+<meta property="og:description" content="在用MJExtension将NSDictionary转成Model的过程中，要注意好多细节。但是其中最重要、最难以发现的问题是，Model中有一个object的数据类型是自定义的GFImage类型，当setValue运行到此处时，会crash并出现错误unrecognized selector sent to instance.  一般这个错误出现的原因是：在赋值之前，这个指针就被释放了。 本来是">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2017-06-06T02:26:59.000Z">
-<meta property="article:modified_time" content="2020-04-05T02:38:27.589Z">
+<meta property="article:published_time" content="2017-06-06T02:40:20.000Z">
+<meta property="article:modified_time" content="2020-04-05T02:42:40.650Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="ios">
 <meta name="twitter:card" content="summary">
@@ -155,27 +155,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2017-06-06-ios-code" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2017-06-06-ios" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      2017-06-06【iOS可重复用代码】清内存
+      2017-06-06【iOS今天小收获】使用MJExtension将JSON转Model要主要的细节
     </h1>
   
 
         
-        <a href="/2017/06/06/2017-06-06-ios-code/" class="archive-article-date">
-  	<time datetime="2017-06-06T02:26:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-06</time>
+        <a href="/2017/06/06/2017-06-06-ios/" class="archive-article-date">
+  	<time datetime="2017-06-06T02:40:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="清内存"><a href="#清内存" class="headerlink" title="清内存"></a>清内存</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">CGFloat size &#x3D; [SDImageCache sharedImageCache].getSize &#x2F; 1000.0 &#x2F; 1000;</span><br><span class="line"></span><br><span class="line">    if (size !&#x3D; 0) &#123;</span><br><span class="line">        if (indexPath.section &#x3D;&#x3D; 2 &amp;&amp; indexPath.row &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            [[SDImageCache sharedImageCache] clearDisk];</span><br><span class="line">            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];</span><br><span class="line">            [SVProgressHUD showWithStatus:@&quot;Deleting buffer memory...&quot;];</span><br><span class="line">            NSLog(@&quot;Delering buffer memory selected&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        [self.tableView reloadData];</span><br><span class="line">        [SVProgressHUD dismiss];</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+        <p>在用MJExtension将NSDictionary转成Model的过程中，要注意好多细节。但是其中最重要、最难以发现的问题是，Model中有一个object的数据类型是自定义的GFImage类型，当setValue运行到此处时，会crash并出现错误<code>unrecognized selector sent to instance</code>. </p>
+<p>一般这个错误出现的原因是：在赋值之前，这个指针就被释放了。</p>
+<p>本来是 <code>@property (nonatomic, copy) GFImage *eventBanner;</code><br>我改成了 <code>@property (nonatomic, retain) GFImage *eventBanner;</code></p>
+<p>然后就成功了。 因为我查了copy，retain，strong 等的区别，retain和strong可以防止指针的释放。</p>
+
       
 
       
@@ -265,7 +269,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/06/06/2017-06-06-ios-code/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/06/06/2017-06-06-ios/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -279,15 +283,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/06/2017-06-06-ios/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/07/24/2017-07-24-ios-achievement/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          2017-06-06【iOS今天小收获】使用MJExtension将JSON转Model要主要的细节
+          2017-07-24 【iOS今天的收获】最简单的返回前一个viewController并局部更新的方法
         
       </div>
     </a>
   
+  
+    <a href="/2017/06/06/2017-06-06-ios-code/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2017-06-06【iOS可重复用代码】清内存</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
