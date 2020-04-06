@@ -152,6 +152,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2019-12-20-react-useEffect" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/07/2019-12-20-react-useEffect/">React - useEffect究竟代表lifecycle的哪部分？</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/07/2019-12-20-react-useEffect/" class="archive-article-date">
+  	<time datetime="2020-04-07T00:39:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="useEffect应用情景"><a href="#useEffect应用情景" class="headerlink" title="useEffect应用情景"></a>useEffect应用情景</h3><ol>
+<li>当我们使用useQuery从后端取到data之后，有时我们想把data存到redux里面，那么就可以在useEffect里面，将data作为dependency，当data有变化时执行一个react的action，dispatch这个data到redux里面。e.g.<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (data) &#123;</span><br><span class="line">        storeDataToRedux(data); <span class="comment">//an action to dispatch to redux store</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, [data, storeDataToRedux]);</span><br></pre></td></tr></table></figure></li>
+<li>当一个backend query依赖于其他地方传给它的parameter时，也可以把param作为useEffect的dependency，并在useEffect里面执行那个backend query。e.g.<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> getCustomerDetail = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; data &#125; = <span class="keyword">await</span> apolloClient.query(&#123;</span><br><span class="line">            query: GET_CUSTOMER_DETAIL</span><br><span class="line">            variables: &#123; customerNumber &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        store.dispatch(storeCustomerDetail(data.getCustomerDetail));</span><br><span class="line">    &#125;;</span><br><span class="line">    getCustomerDetail();</span><br><span class="line">&#125;, [apolloClient, store, getCustomerDetail]);</span><br></pre></td></tr></table></figure>
+<h3 id="有趣的问题"><a href="#有趣的问题" class="headerlink" title="有趣的问题"></a>有趣的问题</h3>如果我们在useEffect里面添加一个console.log()的话，我们就可以清楚的知道useEffect在什么时候执行了。我们会发现当来到使用useEffect的当前页面，和离开当前页面的时候，都会执行。我们可能会奇怪，为什么离开页面了，useEffect还会执行一次呢？</li>
+</ol>
+<h3 id="原因来自official-document"><a href="#原因来自official-document" class="headerlink" title="原因来自official document"></a>原因来自official document</h3><blockquote>
+<p>If you’re familiar with React class lifecycle methods, you can think of useEffect Hook as componentDidMount, componentDidUpdate, and componentWillUnmount combined.</p>
+</blockquote>
+<p>所以，下一次观察到，来到这个页面useEffect就执行力2次，离开这个页面又执行1次，就不会再奇怪啦。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/07/2019-12-20-react-useEffect/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -767,6 +849,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
             
             <div class="clearfix"></div>
