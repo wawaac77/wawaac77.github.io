@@ -15,11 +15,15 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="In component.style.ts 123456789101112131415import styled from &#39;styled-compoments&#39;;export const StyledWrapperWithTriangle &#x3D; styled.div&#96;  &amp;:before &amp;#123;    content: &quot;&quot;;    position: absolute;    wi">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/04/10/2020-04-10-draw-triangle-in-css/triangle_hello_world.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/10/2020-04-10-draw-triangle-in-css/border_with_different_colors.png">
 <meta property="article:published_time" content="2020-04-09T20:36:41.000Z">
-<meta property="article:modified_time" content="2020-04-09T21:39:27.075Z">
+<meta property="article:modified_time" content="2020-04-09T21:51:49.668Z">
 <meta property="article:author" content="Alice Jin">
-<meta property="article:tag" content="react, css">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/10/2020-04-10-draw-triangle-in-css/triangle_hello_world.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -190,9 +194,9 @@
         <p>In <code>component.style.ts</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'styled-compoments'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> StyledWrapperWithTriangle = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  &amp;:before &#123;</span></span><br><span class="line"><span class="string">    content: "";</span></span><br><span class="line"><span class="string">    position: absolute;</span></span><br><span class="line"><span class="string">    width: 0px;</span></span><br><span class="line"><span class="string">    height: 0px;</span></span><br><span class="line"><span class="string">    left: 0px;</span></span><br><span class="line"><span class="string">    top: 10px;</span></span><br><span class="line"><span class="string">    border-left: 5px solid transparent;</span></span><br><span class="line"><span class="string">    border-right: 5px solid transparent;</span></span><br><span class="line"><span class="string">    border-bottom: 10px solid red;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br></pre></td></tr></table></figure>
 
-<p>Then you will draw a triangle :small_red_triangle: facing up with just css styling now!</p>
+<p>Then you will draw a triangle facing up with just css styling now!<br><img src="/2020/04/10/2020-04-10-draw-triangle-in-css/triangle_hello_world.png" alt=""></p>
 <h3 id="Why-this-works"><a href="#Why-this-works" class="headerlink" title="Why this works?"></a>Why this works?</h3><p>First of all, we ustilize <code>border</code>. We seldom think about how borders arrange around the element. What’s gonna happen if we set 4 borders all diffrent colors?</p>
-<p>![](Screen Shot 2020-04-10 at 7.20.55 am.png)</p>
+<p><img src="/2020/04/10/2020-04-10-draw-triangle-in-css/border_with_different_colors.png" alt=""></p>
 <p>Then, think about what if we make the content being wrapped smaller and smaller, until a 1px * 1px dot, then 0px * 0px invisible dot.</p>
 <p>It will be 4 triangles putting together.</p>
 <p>Then we set the other 3 triangles at the top, left and right as transparent.</p>
@@ -238,7 +242,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react, css</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
         		</li>
       		
 		</ul>
@@ -452,7 +460,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react, css</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
             
             <div class="clearfix"></div>
