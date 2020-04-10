@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Export &amp; Import in react | Hexo</title>
+  <title>Export &amp; Import in React | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="We can often see:export * from &#39;.&#x2F;Components&#39;; What does * mean? A module can wrap one or more modules and combine all their exports using export * from &#39;.&#x2F;Components&#39;; syntax  一般这句cod">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Export &amp; Import in react">
+<meta property="og:title" content="Export &amp; Import in React">
 <meta property="og:url" content="http://yoursite.com/2020/04/11/2020-04-11-export-in-react/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="We can often see:export * from &#39;.&#x2F;Components&#39;; What does * mean? A module can wrap one or more modules and combine all their exports using export * from &#39;.&#x2F;Components&#39;; syntax  一般这句cod">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-10T21:12:08.000Z">
-<meta property="article:modified_time" content="2020-04-10T21:41:44.020Z">
+<meta property="article:modified_time" content="2020-04-10T21:44:45.727Z">
 <meta property="article:author" content="Alice Jin">
 <meta property="article:tag" content="react">
 <meta name="twitter:card" content="summary">
@@ -174,7 +174,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Export &amp; Import in react
+      Export &amp; Import in React
     </h1>
   
 
@@ -196,8 +196,8 @@
 <p>那么直接在Component想export的小部件里前面，加<code>export</code> 或 <code>default export</code> 就好.</p>
 <p>React Apps可以看作是可交互的小部件的集合，就好像乐高一样，我们把它搭建成一个成品。</p>
 <p>那么相同样子、用途的部件的重复使用是很重要的。我们常常把一些共用的部件放在另外的file里面，然后export出去，在需要的地方再import就可以啦。</p>
-<h3 id="Import默认的export"><a href="#Import默认的export" class="headerlink" title="Import默认的export"></a>Import默认的export</h3><p>每一个module可以声明最多一个default export。我们想引用时，只需要import它的地址就可以了。import的声明给它一个我们想要的名字。像这样 <code>import AnyNameYouLike from &#39;../../Components&#39;</code></p>
-<h3 id="Import命名过的value"><a href="#Import命名过的value" class="headerlink" title="Import命名过的value"></a>Import命名过的value</h3><p>每一个module可以export很多不同名字的部件。我们可以引用它的名字 <code>import { Header } from &#39;../../Components</code></p>
+<h3 id="import默认的export"><a href="#import默认的export" class="headerlink" title="import默认的export"></a>import默认的export</h3><p>每一个module可以声明最多一个default export。我们想引用时，只需要import它的地址就可以了。import的声明给它一个我们想要的名字。像这样 <code>import AnyNameYouLike from &#39;../../Components&#39;</code></p>
+<h3 id="import命名过的部件"><a href="#import命名过的部件" class="headerlink" title="import命名过的部件"></a>import命名过的部件</h3><p>每一个module可以export很多不同名字的部件。我们可以引用它的名字 <code>import { Header } from &#39;../../Components</code></p>
 <p>还可以重名成我们需要的名字 <code>import { Header as PageHeader } from &#39;../../Components</code></p>
 <h3 id="还可以一起引用"><a href="#还可以一起引用" class="headerlink" title="还可以一起引用"></a>还可以一起引用</h3><p> <code>import AnyNameYouLike， { Header } from &#39;../../Components&#39;</code></p>
 <hr>
@@ -438,15 +438,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tips</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tips</a>
               </li>
              
               <li class="article-tag-list-item">
