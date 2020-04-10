@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>2020-04-03 [决策方式]]How to decide which design pattern to select | Hexo</title>
+  <title>Export &amp; Import in react | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="做项目的时候，一个功能经常可以有不同的解决方法，需要team去讨论和做决策。有的解决方法简单直接，但是不利于未来的拓展。有的方法非常易于未来的改动，但实现方法稍微复杂，或者需要引入其他第三方的library。除了具体实现细节的分析，我们还可以问自己，以及向团队去提出这样的问题：  是否可以给现在的项目带来收益？复杂度与收益的平衡点在哪里？ 每一种设计模式、数据结构、概念，都有它的强项、适合的场景，">
+  <meta name="description" content="We can often see:export * from &#39;.&#x2F;Components&#39;; What does * mean? A module can wrap one or more modules and combine all their exports using export * from &#39;.&#x2F;Components&#39;; syntax  一般这句cod">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2020-04-03 [决策方式]]How to decide which design pattern to select">
-<meta property="og:url" content="http://yoursite.com/2020/04/03/2020-04-03-how-to-decide-design-pattern-to-select/index.html">
+<meta property="og:title" content="Export &amp; Import in react">
+<meta property="og:url" content="http://yoursite.com/2020/04/11/2020-04-11-export-in-react/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="做项目的时候，一个功能经常可以有不同的解决方法，需要team去讨论和做决策。有的解决方法简单直接，但是不利于未来的拓展。有的方法非常易于未来的改动，但实现方法稍微复杂，或者需要引入其他第三方的library。除了具体实现细节的分析，我们还可以问自己，以及向团队去提出这样的问题：  是否可以给现在的项目带来收益？复杂度与收益的平衡点在哪里？ 每一种设计模式、数据结构、概念，都有它的强项、适合的场景，">
+<meta property="og:description" content="We can often see:export * from &#39;.&#x2F;Components&#39;; What does * mean? A module can wrap one or more modules and combine all their exports using export * from &#39;.&#x2F;Components&#39;; syntax  一般这句cod">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-02T21:45:33.000Z">
-<meta property="article:modified_time" content="2020-04-05T22:54:58.418Z">
+<meta property="article:published_time" content="2020-04-10T21:12:08.000Z">
+<meta property="article:modified_time" content="2020-04-10T21:41:44.020Z">
 <meta property="article:author" content="Alice Jin">
-<meta property="article:tag" content="method">
+<meta property="article:tag" content="react">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -167,31 +167,41 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2020-04-03-how-to-decide-design-pattern-to-select" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2020-04-11-export-in-react" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      2020-04-03 [决策方式]]How to decide which design pattern to select
+      Export &amp; Import in react
     </h1>
   
 
         
-        <a href="/2020/04/03/2020-04-03-how-to-decide-design-pattern-to-select/" class="archive-article-date">
-  	<time datetime="2020-04-02T21:45:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
+        <a href="/2020/04/11/2020-04-11-export-in-react/" class="archive-article-date">
+  	<time datetime="2020-04-10T21:12:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>做项目的时候，一个功能经常可以有不同的解决方法，需要team去讨论和做决策。有的解决方法简单直接，但是不利于未来的拓展。有的方法非常易于未来的改动，但实现方法稍微复杂，或者需要引入其他第三方的library。除了具体实现细节的分析，我们还可以问自己，以及向团队去提出这样的问题：</p>
-<ol>
-<li>是否可以给现在的项目带来收益？复杂度与收益的平衡点在哪里？</li>
-<li>每一种设计模式、数据结构、概念，都有它的强项、适合的场景，不然它也不会一直流行在市场上。那么这种模式、结构、概念，是最适合我们现有的项目的吗？</li>
-</ol>
+        <p>We can often see:<br><code>export * from &#39;./Components&#39;;</code></p>
+<h3 id="What-does-mean"><a href="#What-does-mean" class="headerlink" title="What does * mean?"></a>What does * mean?</h3><blockquote>
+<p>A module can wrap one or more modules and combine all their exports using <code>export * from &#39;./Components&#39;;</code> syntax</p>
+</blockquote>
+<p>一般这句code放在Components同一个folder的index.ts里面。</p>
+<h5 id="这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index-ts里面的import就好，project里面所有其他地方的import都不需要改动。"><a href="#这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index-ts里面的import就好，project里面所有其他地方的import都不需要改动。" class="headerlink" title="这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index.ts里面的import就好，project里面所有其他地方的import都不需要改动。"></a>这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改<code>index.ts</code>里面的import就好，project里面所有其他地方的import都不需要改动。</h5><p>当然也可以选择不用index.ts</p>
+<p>那么直接在Component想export的小部件里前面，加<code>export</code> 或 <code>default export</code> 就好.</p>
+<p>React Apps可以看作是可交互的小部件的集合，就好像乐高一样，我们把它搭建成一个成品。</p>
+<p>那么相同样子、用途的部件的重复使用是很重要的。我们常常把一些共用的部件放在另外的file里面，然后export出去，在需要的地方再import就可以啦。</p>
+<h3 id="Import默认的export"><a href="#Import默认的export" class="headerlink" title="Import默认的export"></a>Import默认的export</h3><p>每一个module可以声明最多一个default export。我们想引用时，只需要import它的地址就可以了。import的声明给它一个我们想要的名字。像这样 <code>import AnyNameYouLike from &#39;../../Components&#39;</code></p>
+<h3 id="Import命名过的value"><a href="#Import命名过的value" class="headerlink" title="Import命名过的value"></a>Import命名过的value</h3><p>每一个module可以export很多不同名字的部件。我们可以引用它的名字 <code>import { Header } from &#39;../../Components</code></p>
+<p>还可以重名成我们需要的名字 <code>import { Header as PageHeader } from &#39;../../Components</code></p>
+<h3 id="还可以一起引用"><a href="#还可以一起引用" class="headerlink" title="还可以一起引用"></a>还可以一起引用</h3><p> <code>import AnyNameYouLike， { Header } from &#39;../../Components&#39;</code></p>
+<hr>
+<p>React Apps can be seen as a collection of interactive components.</p>
 
       
 
@@ -226,7 +236,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">method</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
         		</li>
       		
 		</ul>
@@ -282,7 +292,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/03/2020-04-03-how-to-decide-design-pattern-to-select/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/11/2020-04-11-export-in-react/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -296,18 +306,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/05/A-Sunday-morning/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          A Sunday morning
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/24/2017-07-24-ios-achievement/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2017-07-24 【iOS今天的收获】最简单的返回前一个viewController并局部更新的方法</div>
+    <a href="/2020/04/10/2020-04-10-draw-triangle-in-css/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">An interesting way to draw triangle in CSS</div>
       <i class="icon-circle-right"></i>
     </a>
   

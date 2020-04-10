@@ -164,6 +164,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-04-11-export-in-react" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/11/2020-04-11-export-in-react/">Export &amp; Import in react</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/11/2020-04-11-export-in-react/" class="archive-article-date">
+  	<time datetime="2020-04-10T21:12:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>We can often see:<br><code>export * from &#39;./Components&#39;;</code></p>
+<h3 id="What-does-mean"><a href="#What-does-mean" class="headerlink" title="What does * mean?"></a>What does * mean?</h3><blockquote>
+<p>A module can wrap one or more modules and combine all their exports using <code>export * from &#39;./Components&#39;;</code> syntax</p>
+</blockquote>
+<p>一般这句code放在Components同一个folder的index.ts里面。</p>
+<h5 id="这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index-ts里面的import就好，project里面所有其他地方的import都不需要改动。"><a href="#这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index-ts里面的import就好，project里面所有其他地方的import都不需要改动。" class="headerlink" title="这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index.ts里面的import就好，project里面所有其他地方的import都不需要改动。"></a>这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改<code>index.ts</code>里面的import就好，project里面所有其他地方的import都不需要改动。</h5><p>当然也可以选择不用index.ts</p>
+<p>那么直接在Component想export的小部件里前面，加<code>export</code> 或 <code>default export</code> 就好.</p>
+<p>React Apps可以看作是可交互的小部件的集合，就好像乐高一样，我们把它搭建成一个成品。</p>
+<p>那么相同样子、用途的部件的重复使用是很重要的。我们常常把一些共用的部件放在另外的file里面，然后export出去，在需要的地方再import就可以啦。</p>
+<h3 id="Import默认的export"><a href="#Import默认的export" class="headerlink" title="Import默认的export"></a>Import默认的export</h3><p>每一个module可以声明最多一个default export。我们想引用时，只需要import它的地址就可以了。import的声明给它一个我们想要的名字。像这样 <code>import AnyNameYouLike from &#39;../../Components&#39;</code></p>
+<h3 id="Import命名过的value"><a href="#Import命名过的value" class="headerlink" title="Import命名过的value"></a>Import命名过的value</h3><p>每一个module可以export很多不同名字的部件。我们可以引用它的名字 <code>import { Header } from &#39;../../Components</code></p>
+<p>还可以重名成我们需要的名字 <code>import { Header as PageHeader } from &#39;../../Components</code></p>
+<h3 id="还可以一起引用"><a href="#还可以一起引用" class="headerlink" title="还可以一起引用"></a>还可以一起引用</h3><p> <code>import AnyNameYouLike， { Header } from &#39;../../Components&#39;</code></p>
+<hr>
+<p>React Apps can be seen as a collection of interactive components.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/11/2020-04-11-export-in-react/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-04-10-draw-triangle-in-css" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -938,79 +1026,10 @@
 
 
   
-    <article id="post-2017-06-06-ios-code" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/06/2017-06-06-ios-code/">2017-06-06【iOS可重复用代码】清内存</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/06/2017-06-06-ios-code/" class="archive-article-date">
-  	<time datetime="2017-06-06T02:26:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="清内存"><a href="#清内存" class="headerlink" title="清内存"></a>清内存</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">CGFloat size &#x3D; [SDImageCache sharedImageCache].getSize &#x2F; 1000.0 &#x2F; 1000;</span><br><span class="line"></span><br><span class="line">    if (size !&#x3D; 0) &#123;</span><br><span class="line">        if (indexPath.section &#x3D;&#x3D; 2 &amp;&amp; indexPath.row &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            [[SDImageCache sharedImageCache] clearDisk];</span><br><span class="line">            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];</span><br><span class="line">            [SVProgressHUD showWithStatus:@&quot;Deleting buffer memory...&quot;];</span><br><span class="line">            NSLog(@&quot;Delering buffer memory selected&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        [self.tableView reloadData];</span><br><span class="line">        [SVProgressHUD dismiss];</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ios</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/06/2017-06-06-ios-code/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -1108,15 +1127,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tips</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tips</a>
               </li>
              
               <li class="article-tag-list-item">
