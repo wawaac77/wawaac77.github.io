@@ -164,6 +164,174 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-04-03-how-to-decide-design-pattern-to-select" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/03/2020-04-03-how-to-decide-design-pattern-to-select/">2020-04-03 [决策方式]]How to decide which design pattern to select</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/03/2020-04-03-how-to-decide-design-pattern-to-select/" class="archive-article-date">
+  	<time datetime="2020-04-02T21:45:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>做项目的时候，一个功能经常可以有不同的解决方法，需要team去讨论和做决策。有的解决方法简单直接，但是不利于未来的拓展。有的方法非常易于未来的改动，但实现方法稍微复杂，或者需要引入其他第三方的library。除了具体实现细节的分析，我们还可以问自己，以及向团队去提出这样的问题：</p>
+<ol>
+<li>是否可以给现在的项目带来收益？复杂度与收益的平衡点在哪里？</li>
+<li>每一种设计模式、数据结构、概念，都有它的强项、适合的场景，不然它也不会一直流行在市场上。那么这种模式、结构、概念，是最适合我们现有的项目的吗？</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">method</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/03/2020-04-03-how-to-decide-design-pattern-to-select/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2017-07-24-ios-achievement" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/24/2017-07-24-ios-achievement/">2017-07-24 【iOS今天的收获】最简单的返回前一个viewController并局部更新的方法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/24/2017-07-24-ios-achievement/" class="archive-article-date">
+  	<time datetime="2017-07-24T02:26:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="应用情景"><a href="#应用情景" class="headerlink" title="应用情景"></a>应用情景</h2><p>类似于微博，前一个tableViewController列表中的某个内容点赞后，点击内容进入detailViewController，在里面取消赞，再返回前一页的tableViewController的时候，局部更新刚刚的改变，而不是整个[table reloadData].</p>
+<h2 id="如何局部更新"><a href="#如何局部更新" class="headerlink" title="如何局部更新"></a>如何局部更新</h2><p>第一个想解决的是，如何局部更新。我之前不确定，局部更新会不会令table的内容从头开始，答案是不会，table会保留点击进入下一个页面那一刻的位置。table指定位置更新的代码是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSIndexPath *indexPath&#x3D;[NSIndexPath indexPathForRow:3 inSection:0];</span><br><span class="line"></span><br><span class="line">[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];</span><br></pre></td></tr></table></figure>
+<h2 id="Possible-solutions"><a href="#Possible-solutions" class="headerlink" title="Possible solutions"></a>Possible solutions</h2><p>那么更新代码放在哪里呢？是viewController1的viewWillAppear？还是viewController2的viewWillDisappear?</p>
+<p>indexPath的信息从哪里来呢？是viewController1本身可以存贮？还是viewController2 利用delegate来passValue过去？</p>
+<p>其实这些方案应该都可以得到正确的效果，只是复杂度不同。</p>
+<h2 id="最简单的方法"><a href="#最简单的方法" class="headerlink" title="最简单的方法"></a>最简单的方法</h2><p>最后我发现最简单的方法是，在viewController1的viewWillAppear里面，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-(void)viewWillAppear:(BOOL)animated&#123;</span><br><span class="line"></span><br><span class="line">    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="这个方法回答了以上两个疑问："><a href="#这个方法回答了以上两个疑问：" class="headerlink" title="这个方法回答了以上两个疑问："></a>这个方法回答了以上两个疑问：</h2><ol>
+<li><p>IndexPath 来自本身tableView的<code>indexPathForSelectedRow</code>，之所以我们可以取得这个数据，是因为返回此viewController1它位置停留在点击跳转的那一刻，意味着系统一定记录了这个位置，那么我们就可以取得这个数据为我们所用。</p>
+<p> 其实我尝试过 <code>@property (strong, nonatomic) NSIndexPath *recordIndexPath;</code> 来记录选中的indexPath，但是返回时这个数据清空了，它不是全局变量，viewController是来controller view的，不记录这个变量的具体解释以后再仔细研究。</p>
+</li>
+</ol>
+<ol start="2">
+<li>返回前一页也会触发viewWillAppear，第一次加载也会触发viewWillAppear，这个意味着要小心第一次加载触发时想利用的数据还不存在而导致的错误。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ios</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/24/2017-07-24-ios-achievement/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2017-06-06-ios" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -432,6 +600,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">reading</a>
               </li>
             
             <div class="clearfix"></div>
