@@ -164,6 +164,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-05-03-jest-each" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/03/2020-05-03-jest-each/">一个方法减少测试代码行数 - jest each syntax</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/03/2020-05-03-jest-each/" class="archive-article-date">
+  	<time datetime="2020-05-03T09:40:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>无需太多解释，代码说话</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">"test add"</span>, () =&gt; &#123;</span><br><span class="line">  it(<span class="string">"should return 3 when 1 and 2 are added"</span>, () =&gt; &#123;</span><br><span class="line">    expect(add(<span class="number">1</span>, <span class="number">2</span>)).toEqual(<span class="number">3</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"should return 6000 when 2000 and 4000 are added"</span>, () =&gt; &#123;</span><br><span class="line">    expect(add(<span class="number">2000</span>, <span class="number">4000</span>)).toEqual(<span class="number">6000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"should return -5 when -2 and -3 are added"</span>, () =&gt; &#123;</span><br><span class="line">    expect(add(<span class="number">-2</span>, <span class="number">-3</span>)).toEqual(<span class="number">-5</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"should return 0 when -100 and 100 are added"</span>, () =&gt; &#123;</span><br><span class="line">    expect(add(<span class="number">-100</span>, <span class="number">100</span>)).toEqual(<span class="number">0</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">"test add"</span>, () =&gt; &#123;</span><br><span class="line">  it.each<span class="string">`</span></span><br><span class="line"><span class="string">    a       | b       | result</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;<span class="number">1</span>&#125;</span>    | <span class="subst">$&#123;<span class="number">2</span>&#125;</span>    | <span class="subst">$&#123;<span class="number">3</span>&#125;</span></span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;<span class="number">2000</span>&#125;</span> | <span class="subst">$&#123;<span class="number">4000</span>&#125;</span> | <span class="subst">$&#123;<span class="number">6000</span>&#125;</span></span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;<span class="number">-2</span>&#125;</span>   | <span class="subst">$&#123;<span class="number">-3</span>&#125;</span>   | <span class="subst">$&#123;<span class="number">-5</span>&#125;</span></span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;<span class="number">-100</span>&#125;</span> | <span class="subst">$&#123;<span class="number">100</span>&#125;</span>  | <span class="subst">$&#123;<span class="number">0</span>&#125;</span></span></span><br><span class="line"><span class="string">  `</span>(<span class="string">"should return $result when $a and $b are added"</span>, (&#123; a, b, result &#125;) =&gt; &#123;</span><br><span class="line">    expect(add(a, b)).toEqual(result);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/03/2020-05-03-jest-each/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-05-03-prototype" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -946,119 +1023,6 @@
 
 
   
-    <article id="post-shortcuts" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/08/shortcuts/">shortcuts</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/08/shortcuts/" class="archive-article-date">
-  	<time datetime="2020-04-07T22:45:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Shortcusts-for-VSCode"><a href="#Shortcusts-for-VSCode" class="headerlink" title="Shortcusts for VSCode"></a>Shortcusts for VSCode</h2><table>
-<thead>
-<tr>
-<th>shortcuts</th>
-<th>function</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>option + shift + arrow down</td>
-<td>copy</td>
-</tr>
-<tr>
-<td>command + shift + k</td>
-<td>delete</td>
-</tr>
-<tr>
-<td>option + shift + f</td>
-<td>format</td>
-</tr>
-<tr>
-<td>control + g</td>
-<td>jump to certian line</td>
-</tr>
-<tr>
-<td>command + shift + 0</td>
-<td>jump to a symbol</td>
-</tr>
-<tr>
-<td>F8</td>
-<td>jump to next error</td>
-</tr>
-<tr>
-<td>option + .</td>
-<td>extract function</td>
-</tr>
-<tr>
-<td>control + space</td>
-<td>suggestion</td>
-</tr>
-</tbody></table>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/08/shortcuts/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1160,15 +1124,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color2">method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1176,11 +1136,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1189,6 +1149,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">thinking</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TDD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
             
             <div class="clearfix"></div>
