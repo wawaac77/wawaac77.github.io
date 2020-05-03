@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>一个方法减少测试代码行数 - jest each syntax | Hexo</title>
+  <title>Throw error | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="无需太多解释，代码说话 1234567891011121314151617describe(&quot;test add&quot;, () &#x3D;&gt; &amp;#123;  it(&quot;should return 3 when 1 and 2 are added&quot;, () &#x3D;&gt; &amp;#123;    expect(add(1, 2)).toEqual(3);  &amp;#125;);  it(&quot;should return 60">
+  <meta name="description" content="throw new Error(&quot;Here is error message.&quot;); 在一个function里面，这句代码执行之后，这个function里面后面的代码都不会执行哦。 可以试试如果把它不放在if或者try那样的条件里面，直接写在function中间某个位置，这句代码下面的代码都是灰色的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个方法减少测试代码行数 - jest each syntax">
-<meta property="og:url" content="http://yoursite.com/2020/05/03/2020-05-03-jest-each/index.html">
+<meta property="og:title" content="Throw error">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/2020-05-03-throw-error/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="无需太多解释，代码说话 1234567891011121314151617describe(&quot;test add&quot;, () &#x3D;&gt; &amp;#123;  it(&quot;should return 3 when 1 and 2 are added&quot;, () &#x3D;&gt; &amp;#123;    expect(add(1, 2)).toEqual(3);  &amp;#125;);  it(&quot;should return 60">
+<meta property="og:description" content="throw new Error(&quot;Here is error message.&quot;); 在一个function里面，这句代码执行之后，这个function里面后面的代码都不会执行哦。 可以试试如果把它不放在if或者try那样的条件里面，直接写在function中间某个位置，这句代码下面的代码都是灰色的。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-03T09:40:07.000Z">
-<meta property="article:modified_time" content="2020-05-03T09:54:13.580Z">
+<meta property="article:published_time" content="2020-05-03T09:57:33.000Z">
+<meta property="article:modified_time" content="2020-05-03T10:03:29.815Z">
 <meta property="article:author" content="Alice Jin">
-<meta property="article:tag" content="TDD">
+<meta property="article:tag" content="javascript, typescript">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -167,30 +167,29 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2020-05-03-jest-each" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2020-05-03-throw-error" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      一个方法减少测试代码行数 - jest each syntax
+      Throw error
     </h1>
   
 
         
-        <a href="/2020/05/03/2020-05-03-jest-each/" class="archive-article-date">
-  	<time datetime="2020-05-03T09:40:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-03</time>
+        <a href="/2020/05/03/2020-05-03-throw-error/" class="archive-article-date">
+  	<time datetime="2020-05-03T09:57:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>无需太多解释，代码说话</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">"test add"</span>, () =&gt; &#123;</span><br><span class="line">  it(<span class="string">"should return 3 when 1 and 2 are added"</span>, () =&gt; &#123;</span><br><span class="line">    expect(add(<span class="number">1</span>, <span class="number">2</span>)).toEqual(<span class="number">3</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"should return 6000 when 2000 and 4000 are added"</span>, () =&gt; &#123;</span><br><span class="line">    expect(add(<span class="number">2000</span>, <span class="number">4000</span>)).toEqual(<span class="number">6000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"should return -5 when -2 and -3 are added"</span>, () =&gt; &#123;</span><br><span class="line">    expect(add(<span class="number">-2</span>, <span class="number">-3</span>)).toEqual(<span class="number">-5</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"should return 0 when -100 and 100 are added"</span>, () =&gt; &#123;</span><br><span class="line">    expect(add(<span class="number">-100</span>, <span class="number">100</span>)).toEqual(<span class="number">0</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">"test add"</span>, () =&gt; &#123;</span><br><span class="line">  it.each<span class="string">`</span></span><br><span class="line"><span class="string">    a       | b       | result</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;<span class="number">1</span>&#125;</span>    | <span class="subst">$&#123;<span class="number">2</span>&#125;</span>    | <span class="subst">$&#123;<span class="number">3</span>&#125;</span></span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;<span class="number">2000</span>&#125;</span> | <span class="subst">$&#123;<span class="number">4000</span>&#125;</span> | <span class="subst">$&#123;<span class="number">6000</span>&#125;</span></span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;<span class="number">-2</span>&#125;</span>   | <span class="subst">$&#123;<span class="number">-3</span>&#125;</span>   | <span class="subst">$&#123;<span class="number">-5</span>&#125;</span></span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;<span class="number">-100</span>&#125;</span> | <span class="subst">$&#123;<span class="number">100</span>&#125;</span>  | <span class="subst">$&#123;<span class="number">0</span>&#125;</span></span></span><br><span class="line"><span class="string">  `</span>(<span class="string">"should return $result when $a and $b are added"</span>, (&#123; a, b, result &#125;) =&gt; &#123;</span><br><span class="line">    expect(add(a, b)).toEqual(result);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+        <p><code>throw new Error(&quot;Here is error message.&quot;);</code></p>
+<p>在一个function里面，这句代码执行之后，这个function里面后面的代码都不会执行哦。</p>
+<p>可以试试如果把它不放在<code>if</code>或者<code>try</code>那样的条件里面，直接写在function中间某个位置，这句代码下面的代码都是灰色的。</p>
 
       
 
@@ -225,7 +224,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">javascript, typescript</a>
         		</li>
       		
 		</ul>
@@ -281,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/03/2020-05-03-jest-each/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/03/2020-05-03-throw-error/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -295,18 +294,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/03/2020-05-03-throw-error/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Throw error
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/05/03/2020-05-03-prototype/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">prototype是什么？ What&#39;s prototype?</div>
+    <a href="/2020/05/03/2020-05-03-jest-each/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一个方法减少测试代码行数 - jest each syntax</div>
       <i class="icon-circle-right"></i>
     </a>
   
