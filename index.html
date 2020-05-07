@@ -164,6 +164,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-05-07-regex" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/07/2020-05-07-regex/">正则表达式 regex</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/07/2020-05-07-regex/" class="archive-article-date">
+  	<time datetime="2020-05-07T11:09:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>^</code> 叫carrot, 是开始标记</p>
+<p><code>$</code> 是结束标记</p>
+<p><code>.</code> 任意单个字符，除了换行</p>
+<p><code>[1-9]</code> 这样就是1-9都可以</p>
+<p><code>[Ab]</code> 这样就是A可以，b也可以</p>
+<p>代表次数的朋友们：<br><code>*</code> 大于等于0次</p>
+<p><code>+</code> 大于等于1次</p>
+<p><code>?</code> 0次或者1次</p>
+<p>有用的他们：<br><code>\w</code> 匹配所有字母数字, 等同于 [a-zA-Z0-9_]</p>
+<p><code>\W</code> 匹配所有非字母数字, 即符号, 等同于: [^\w]</p>
+<p><code>\d</code> 匹配数字: [0-9]</p>
+<p><code>\D</code> 匹配非数字: [^\d]</p>
+<p>reference: [<a href="https://juejin.im/entry/5993b56f6fb9a0248f4a5f16]" target="_blank" rel="noopener">https://juejin.im/entry/5993b56f6fb9a0248f4a5f16]</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/07/2020-05-07-regex/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-05-07-jest-spyon" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -908,103 +983,9 @@
 
 
   
-    <article id="post-2020-04-13-dairy-agile-life" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/13/2020-04-13-dairy-agile-life/">Agile生活</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/13/2020-04-13-dairy-agile-life/" class="archive-article-date">
-  	<time datetime="2020-04-12T22:29:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在项目开发中，我们经常使用到Agile管理方法。通常以2周作为一个sprint，在sprint planning中规划这两周作为团队可以完成多少的工作量。在开sprint planning会之前，项目中已经被BA（business analyst）分成很多小任务，每个小任务代表一个或几个小小的user story。比如这样，<code>GIVEN</code>: 我在登陆页面上面，<code>WHEN</code>: 当我没有填写用户名和密码，并且当我点击登陆按钮时，<code>THEN</code>: 然后我会在登陆按钮上方看到“用户名或密码错误”的提示。</p>
-<p>每个任务又叫做card/ticket.会议中，团队里面每个人同时根据复杂度，为这个任务打分。一般有1、2、3、5、8、13分，但通常8分、13分很少见，因为分数太大就需要把user story再拆分一下，拆分成2张卡。</p>
-<p>根据之前sprint的经验，会算出平均一个团队一个sprint可以完成多少分。比如可以完成30分，那么就根据任务的优先级（priority），选择一些任务使总分在30分左右，比如2+2+3+5+3+1+1+3 = 30.</p>
-<p>在每个sprint结束的时候，还会有一个sprint review会议，总结这两周做的怎么样，问这样的三个问题：</p>
-<ul>
-<li>什么做的好？</li>
-<li>什么做的不太好，未来可能造成风险？</li>
-<li>什么事情不确定是好还是不好？</li>
-</ul>
-<h4 id="说了这么多项目管理中的Agile，那为什么题目叫做Agile生活呢？"><a href="#说了这么多项目管理中的Agile，那为什么题目叫做Agile生活呢？" class="headerlink" title="说了这么多项目管理中的Agile，那为什么题目叫做Agile生活呢？"></a>说了这么多项目管理中的Agile，那为什么题目叫做Agile生活呢？</h4><p>我觉得规划项目，管理项目的方法，也可以应用到我们的生活、效率管理中。周末的时候，有整整两天属于我们的空白休息时间。之前的我，有时候没有提前规划，两天很快就不知不觉流逝了，也没有感受到好好的休息，或者想做的事情太多了，最后一些比较重要的事情也没有完成。我觉得提前规划周末，或者任何假期都是一个很好的方法。我们可以借鉴Agile的思路。</p>
-<ol>
-<li>在纸上写下想做的事情，任何事情都可以，越具体越好。</li>
-<li>然后按照重要程度，和想做这件事的程度，为这些事情大概排序。</li>
-<li>然后在每个事情旁边写下做它大概需要多久，比如30分钟、2小时等等，估计时为自己留出余量（buffer）</li>
-<li>周末除去睡觉会有32小时的事情，那么就用我们想做的事情填满这32小时吧！</li>
-</ol>
-<h4 id="别忘了还可以经常总结反思自己最近过得怎么样"><a href="#别忘了还可以经常总结反思自己最近过得怎么样" class="headerlink" title="别忘了还可以经常总结反思自己最近过得怎么样"></a>别忘了还可以经常总结反思自己最近过得怎么样</h4><p>问自己这样几个问题</p>
-<ul>
-<li><p>What went well? </p>
-<p>  什么做得好？</p>
-</li>
-<li><p>What didn’t go well? </p>
-<p>  什么做得不太好</p>
-</li>
-<li><p>What can I improve on? </p>
-<p>  什么是我可以提升的？</p>
-</li>
-<li><p>What works? </p>
-<p>  什么方法对我行之有效，使我变得更好、更开心了？</p>
-</li>
-</ul>
-<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><p>使用这样的规划方法之后，我就知道假期那天可以做什么，不会错过我想做的事情。要做的和做完的事情被记录下来，我觉得每天更丰富了。似乎活出生命的广度，就是基于每一天的丰富吧。一些困难的事情如果做完了，会很有成就感，觉得自己真的很棒。希望这样的方法也对你有启发！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/13/2020-04-13-dairy-agile-life/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
