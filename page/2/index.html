@@ -164,6 +164,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-04-11-export-in-react" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/11/2020-04-11-export-in-react/">Export &amp; Import in React</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/11/2020-04-11-export-in-react/" class="archive-article-date">
+  	<time datetime="2020-04-10T21:12:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>We can often see:<br><code>export * from &#39;./Components&#39;;</code></p>
+<h3 id="What-does-mean"><a href="#What-does-mean" class="headerlink" title="What does * mean?"></a>What does * mean?</h3><blockquote>
+<p>A module can wrap one or more modules and combine all their exports using <code>export * from &#39;./Components&#39;;</code> syntax</p>
+</blockquote>
+<p>一般这句code放在Components同一个folder的index.ts里面。</p>
+<h5 id="这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index-ts里面的import就好，project里面所有其他地方的import都不需要改动。"><a href="#这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index-ts里面的import就好，project里面所有其他地方的import都不需要改动。" class="headerlink" title="这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index.ts里面的import就好，project里面所有其他地方的import都不需要改动。"></a>这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改<code>index.ts</code>里面的import就好，project里面所有其他地方的import都不需要改动。</h5><p>当然也可以选择不用index.ts</p>
+<p>那么直接在Component想export的小部件里前面，加<code>export</code> 或 <code>default export</code> 就好.</p>
+<p>React Apps可以看作是可交互的小部件的集合，就好像乐高一样，我们把它搭建成一个成品。</p>
+<p>那么相同样子、用途的部件的重复使用是很重要的。我们常常把一些共用的部件放在另外的file里面，然后export出去，在需要的地方再import就可以啦。</p>
+<h3 id="import默认的export"><a href="#import默认的export" class="headerlink" title="import默认的export"></a>import默认的export</h3><p>每一个module可以声明最多一个default export。我们想引用时，只需要import它的地址就可以了。import的声明给它一个我们想要的名字。像这样 <code>import AnyNameYouLike from &#39;../../Components&#39;</code></p>
+<h3 id="import命名过的部件"><a href="#import命名过的部件" class="headerlink" title="import命名过的部件"></a>import命名过的部件</h3><p>每一个module可以export很多不同名字的部件。我们可以引用它的名字 <code>import { Header } from &#39;../../Components</code></p>
+<p>还可以重名成我们需要的名字 <code>import { Header as PageHeader } from &#39;../../Components</code></p>
+<h3 id="还可以一起引用"><a href="#还可以一起引用" class="headerlink" title="还可以一起引用"></a>还可以一起引用</h3><p> <code>import AnyNameYouLike， { Header } from &#39;../../Components&#39;</code></p>
+<hr>
+<p>React Apps can be seen as a collection of interactive components.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/11/2020-04-11-export-in-react/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-04-10-draw-triangle-in-css" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1091,6 +1179,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">TDD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">TDD, jest</a>
               </li>
             
             <div class="clearfix"></div>

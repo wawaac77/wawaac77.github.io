@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Terminal Commands | Hexo</title>
+  <title>jest spyOn怎么用呢？ | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="chown change ownership  chmod change rights sudo chown -R $USER ~&#x2F;.blabla Make the current user own everything inside the folder (and the folder itself) ls -l list in long format mkdir make directory">
+  <meta name="description" content="有时候我们从第三方 library 里面 import 了，或者自己写了一个 object，里面有我们想用的 function A，是给另外一个 function B 使用。 我们想测试 B 真的用了 A 吗？怎么做呢？ jest.spyOn这个时候就可以很方面的帮到我们哦！  jest.spyOn(object, methodName)  以下就是一个来自官方文档，超级直观的例子 例子： 123">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Terminal Commands">
-<meta property="og:url" content="http://yoursite.com/2020/04/09/2020-04-09-terminal-commands/index.html">
+<meta property="og:title" content="jest spyOn怎么用呢？">
+<meta property="og:url" content="http://yoursite.com/2020/05/07/2020-05-07-jest-spyon/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="chown change ownership  chmod change rights sudo chown -R $USER ~&#x2F;.blabla Make the current user own everything inside the folder (and the folder itself) ls -l list in long format mkdir make directory">
+<meta property="og:description" content="有时候我们从第三方 library 里面 import 了，或者自己写了一个 object，里面有我们想用的 function A，是给另外一个 function B 使用。 我们想测试 B 真的用了 A 吗？怎么做呢？ jest.spyOn这个时候就可以很方面的帮到我们哦！  jest.spyOn(object, methodName)  以下就是一个来自官方文档，超级直观的例子 例子： 123">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-08T21:48:55.000Z">
-<meta property="article:modified_time" content="2020-04-09T02:32:27.255Z">
+<meta property="article:published_time" content="2020-05-07T10:51:03.000Z">
+<meta property="article:modified_time" content="2020-05-07T11:08:29.832Z">
 <meta property="article:author" content="Alice Jin">
-<meta property="article:tag" content="tips">
+<meta property="article:tag" content="TDD, jest">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -167,39 +167,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2020-04-09-terminal-commands" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2020-05-07-jest-spyon" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Terminal Commands
+      jest spyOn怎么用呢？
     </h1>
   
 
         
-        <a href="/2020/04/09/2020-04-09-terminal-commands/" class="archive-article-date">
-  	<time datetime="2020-04-08T21:48:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
+        <a href="/2020/05/07/2020-05-07-jest-spyon/" class="archive-article-date">
+  	<time datetime="2020-05-07T10:51:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>chown</code> change ownership </p>
-<p><code>chmod</code> change rights</p>
-<p><code>sudo chown -R $USER ~/.blabla</code> Make the current user own everything inside the folder (and the folder itself)</p>
-<p><code>ls -l</code> list in long format</p>
-<p><code>mkdir</code> make directory</p>
-<p><code>pwd</code> print working directory</p>
-<p><code>cd ..</code> change directory to parent folder</p>
-<p><code>rm</code> remove file</p>
-<p><code>rmdir</code> remove directory</p>
-<p><code>touch test.ts</code> create a file</p>
-<p><code>cat test.ts</code> show the file on the screen</p>
-<p><code>nano test.ts</code> open text editor for the file</p>
-<p><code>vi test.ts</code> open text editor for the file</p>
+        <p>有时候我们从第三方 library 里面 import 了，或者自己写了一个 object，里面有我们想用的 function A，是给另外一个 function B 使用。</p>
+<p>我们想测试 B 真的用了 A 吗？怎么做呢？</p>
+<p><code>jest.spyOn</code>这个时候就可以很方面的帮到我们哦！</p>
+<blockquote>
+<p>jest.spyOn(object, methodName)</p>
+</blockquote>
+<p>以下就是一个来自官方文档，超级直观的例子</p>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> video = &#123;</span><br><span class="line">  play() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = video;</span><br></pre></td></tr></table></figure>
+
+<p>例子的测试</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> video = <span class="built_in">require</span>(<span class="string">"./video"</span>);</span><br><span class="line"></span><br><span class="line">test(<span class="string">"plays video"</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> spy = jest.spyOn(video, <span class="string">"play"</span>);</span><br><span class="line">  <span class="keyword">const</span> isPlaying = video.play();</span><br><span class="line"></span><br><span class="line">  expect(spy).toHaveBeenCalled();</span><br><span class="line">  expect(isPlaying).toBe(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">  spy.mockRestore();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="可能会被不小心忽略，出bug的地方"><a href="#可能会被不小心忽略，出bug的地方" class="headerlink" title="可能会被不小心忽略，出bug的地方"></a>可能会被不小心忽略，出bug的地方</h4><p>如果我们有好几次测试，都spyOn同一个function，如果每次开始测试前没有清除之前的测试的关联的话，可能会出错哦。</p>
+<p>比如我们expect这个function在这个test里面<code>.toHaveBeenCalledTimes(1)</code>, 被执行一次。</p>
+<p>如果之前测试也执行过一次，我们又没有重新设置mock的话，<code>toHaveBeenCalledTimes</code>就会是2次哦。</p>
+<p>可以用 <code>jest.resetAllMocks()</code> 来轻松解决。</p>
+<p>效果和在每一个test之前都加上<code>.mockReset()</code>是一样的。</p>
+<blockquote>
+<p>Resets the state of all mocks. Equivalent to calling .mockReset() on every mocked function. Returns the jest object for chaining.</p>
+</blockquote>
+<h4 id="以下来自官方文档"><a href="#以下来自官方文档" class="headerlink" title="以下来自官方文档"></a>以下来自官方文档</h4><p>Creates a mock function similar to jest.fn but also tracks calls to object[methodName]. Returns a Jest mock function.</p>
+<p>Note: By default, jest.spyOn also calls the spied method. This is different behavior from most other test libraries. If you want to overwrite the original function, you can use jest.spyOn(object, methodName).mockImplementation(() =&gt; customImplementation) or object[methodName] = jest.fn(() =&gt; customImplementation);</p>
 
       
 
@@ -234,7 +244,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">TDD, jest</a>
         		</li>
       		
 		</ul>
@@ -290,7 +300,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/09/2020-04-09-terminal-commands/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/07/2020-05-07-jest-spyon/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -304,18 +314,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/10/2020-04-10-draw-triangle-in-css/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          An interesting way to draw triangle in CSS
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/09/2020-04-09-git-commands/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Git Commands</div>
+    <a href="/2020/05/07/2020-05-07-test-display-none/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何测试display none？</div>
       <i class="icon-circle-right"></i>
     </a>
   
