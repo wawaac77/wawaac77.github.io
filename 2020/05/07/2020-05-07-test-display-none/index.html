@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png">
 <meta property="article:published_time" content="2020-05-07T10:14:26.000Z">
-<meta property="article:modified_time" content="2020-05-07T10:45:15.134Z">
+<meta property="article:modified_time" content="2020-05-07T10:47:45.343Z">
 <meta property="article:author" content="Alice Jin">
 <meta property="article:tag" content="TDD, react-testing-liabrary">
 <meta name="twitter:card" content="summary">
@@ -198,7 +198,7 @@
 <p>可以做到我们想做的吗？</p>
 <p>上面的测试会fail哦！</p>
 <p>因为print-page这个element还在DOM里面，在Document里面，只是设置了不display而已。</p>
-<p><em>而且</em>，这里有一个JSDOM limitation，css没有load到document里面。这个是<code>react-testing-library</code>的作者说的哦。</p>
+<p><strong>而且</strong>，这里有一个JSDOM limitation，css没有load到document里面。这个是<code>react-testing-library</code>的作者说的哦。</p>
 <p><img src="/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png" alt=""></p>
 <p>所以怎么办呢？ 这个stackOverflow的答案可能有帮助哦<br>[<a href="https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]" target="_blank" rel="noopener">https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]</a></p>
 

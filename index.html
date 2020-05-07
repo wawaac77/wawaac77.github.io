@@ -193,7 +193,7 @@
 <p>可以做到我们想做的吗？</p>
 <p>上面的测试会fail哦！</p>
 <p>因为print-page这个element还在DOM里面，在Document里面，只是设置了不display而已。</p>
-<p><em>而且</em>，这里有一个JSDOM limitation，css没有load到document里面。这个是<code>react-testing-library</code>的作者说的哦。</p>
+<p><strong>而且</strong>，这里有一个JSDOM limitation，css没有load到document里面。这个是<code>react-testing-library</code>的作者说的哦。</p>
 <p><img src="/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png" alt=""></p>
 <p>所以怎么办呢？ 这个stackOverflow的答案可能有帮助哦<br>[<a href="https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]" target="_blank" rel="noopener">https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]</a></p>
 
