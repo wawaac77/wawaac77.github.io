@@ -164,6 +164,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-04-10-draw-triangle-in-css" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/10/2020-04-10-draw-triangle-in-css/">An interesting way to draw triangle in CSS</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/10/2020-04-10-draw-triangle-in-css/" class="archive-article-date">
+  	<time datetime="2020-04-09T20:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In <code>component.style.ts</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'styled-compoments'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> StyledWrapperWithTriangle = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  &amp;:before &#123;</span></span><br><span class="line"><span class="string">    content: "";</span></span><br><span class="line"><span class="string">    position: absolute;</span></span><br><span class="line"><span class="string">    width: 0px;</span></span><br><span class="line"><span class="string">    height: 0px;</span></span><br><span class="line"><span class="string">    left: 0px;</span></span><br><span class="line"><span class="string">    top: 10px;</span></span><br><span class="line"><span class="string">    border-left: 5px solid transparent;</span></span><br><span class="line"><span class="string">    border-right: 5px solid transparent;</span></span><br><span class="line"><span class="string">    border-bottom: 10px solid red;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Then you will draw a triangle facing up with just css styling now!<br><img src="/2020/04/10/2020-04-10-draw-triangle-in-css/triangle_hello_world.png" alt=""></p>
+<h3 id="Why-this-works"><a href="#Why-this-works" class="headerlink" title="Why this works?"></a>Why this works?</h3><p>First of all, we ustilize <code>border</code>. We seldom think about how borders arrange around the element. What’s gonna happen if we set 4 borders all diffrent colors?</p>
+<p><img src="/2020/04/10/2020-04-10-draw-triangle-in-css/border_with_different_colors.png" alt=""></p>
+<p>Then, think about what if we make the content being wrapped smaller and smaller, until a 1px * 1px dot, then 0px * 0px invisible dot.</p>
+<p>It will be 4 triangles putting together.</p>
+<p>Then we set the other 3 triangles at the top, left and right as transparent.</p>
+<p>Finally, we get a triangle we want. </p>
+<h3 id="A-further-question-to-think-about"><a href="#A-further-question-to-think-about" class="headerlink" title="A further question to think about"></a>A further question to think about</h3><p>How to draw a triangle facing down by using just css styling?</p>
+<p>.<br>.<br>.<br>.<br>.<br>.</p>
+<p>Here is the answer:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> StyledWrapperWithTriangleDown = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  &amp;:before &#123;</span></span><br><span class="line"><span class="string">    content: "";</span></span><br><span class="line"><span class="string">    position: absolute;</span></span><br><span class="line"><span class="string">    width: 0px;</span></span><br><span class="line"><span class="string">    height: 0px;</span></span><br><span class="line"><span class="string">    left: 0px;</span></span><br><span class="line"><span class="string">    top: 10px;</span></span><br><span class="line"><span class="string">    border-left: 5px solid transparent;</span></span><br><span class="line"><span class="string">    border-right: 5px solid transparent;</span></span><br><span class="line"><span class="string">    border-top: 10px solid red;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Wanna-try-today"><a href="#Wanna-try-today" class="headerlink" title="Wanna try today?"></a>Wanna try today?</h3><p>Here is a playground for with <code>style-components</code> installed. [<a href="https://codesandbox.io/s/rkmnrbye4?file=/Wrapper.js]" target="_blank" rel="noopener">https://codesandbox.io/s/rkmnrbye4?file=/Wrapper.js]</a></p>
+<p>You can style your components from today! YAY!</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/10/2020-04-10-draw-triangle-in-css/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-04-09-terminal-commands" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -508,68 +602,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/07/2019-12-20-react-useEffect/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-A-Sunday-morning" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/05/A-Sunday-morning/">A Sunday morning</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/05/A-Sunday-morning/" class="archive-article-date">
-  	<time datetime="2020-04-05T00:39:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Learn-something-on-Sunday-morning-will-make-you-happy"><a href="#Learn-something-on-Sunday-morning-will-make-you-happy" class="headerlink" title="Learn something on Sunday morning will make you happy"></a>Learn something on Sunday morning will make you happy</h2><h2 id="Making-a-sandwich-on-Sunday-morning-will-make-you-happy"><a href="#Making-a-sandwich-on-Sunday-morning-will-make-you-happy" class="headerlink" title="Making a sandwich on Sunday morning will make you happy"></a>Making a sandwich on Sunday morning will make you happy</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/05/A-Sunday-morning/">展开全文 >></a>
         </p>
       
 
@@ -1022,14 +1054,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tips</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
@@ -1038,15 +1062,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tips</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">reading</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">thinking</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1054,7 +1078,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">TDD, react-testing-liabrary</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thinking</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">javascript, typescript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TDD</a>
               </li>
             
             <div class="clearfix"></div>
