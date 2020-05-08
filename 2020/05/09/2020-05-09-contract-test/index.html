@@ -6,15 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>Contract test 的一个方法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+  <meta name="description" content="什么是contract test？reference: https:&#x2F;&#x2F;medium.com&#x2F;better-practices&#x2F;consumer-driven-contract-testing-using-postman-f3580dba5370 Contract testing是一种确保两个系统可以兼容的一种测试方法，比如两个微服务之间。Contract记录了两个服务之间的互动，来确保两个系统都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Contract test 的一个方法">
+<meta property="og:url" content="http://yoursite.com/2020/05/09/2020-05-09-contract-test/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="什么是contract test？reference: https:&#x2F;&#x2F;medium.com&#x2F;better-practices&#x2F;consumer-driven-contract-testing-using-postman-f3580dba5370 Contract testing是一种确保两个系统可以兼容的一种测试方法，比如两个微服务之间。Contract记录了两个服务之间的互动，来确保两个系统都">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/05/09/2020-05-09-contract-test/contract-testing-img.png">
+<meta property="article:published_time" content="2020-05-08T22:17:30.000Z">
+<meta property="article:modified_time" content="2020-05-08T22:59:57.621Z">
 <meta property="article:author" content="Alice Jin">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/09/2020-05-09-contract-test/contract-testing-img.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -162,64 +168,156 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-2017-06-06-ios" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-2020-05-09-contract-test" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/06/2017-06-06-ios/">2017-06-06【iOS今天小收获】使用MJExtension将JSON转Model要主要的细节</a>
+    <h1 class="article-title" itemprop="name">
+      Contract test 的一个方法
     </h1>
   
 
         
-        <a href="/2017/06/06/2017-06-06-ios/" class="archive-article-date">
-  	<time datetime="2017-06-06T02:40:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-06</time>
+        <a href="/2020/05/09/2020-05-09-contract-test/" class="archive-article-date">
+  	<time datetime="2020-05-08T22:17:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在用MJExtension将NSDictionary转成Model的过程中，要注意好多细节。但是其中最重要、最难以发现的问题是，Model中有一个object的数据类型是自定义的GFImage类型，当setValue运行到此处时，会crash并出现错误<code>unrecognized selector sent to instance</code>. </p>
-<p>一般这个错误出现的原因是：在赋值之前，这个指针就被释放了。</p>
-<p>本来是 <code>@property (nonatomic, copy) GFImage *eventBanner;</code><br>我改成了 <code>@property (nonatomic, retain) GFImage *eventBanner;</code></p>
-<p>然后就成功了。 因为我查了copy，retain，strong 等的区别，retain和strong可以防止指针的释放。</p>
+        <h2 id="什么是contract-test？"><a href="#什么是contract-test？" class="headerlink" title="什么是contract test？"></a>什么是contract test？</h2><p><img src="/2020/05/09/2020-05-09-contract-test/contract-testing-img.png" alt=""><br><a href="https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370" target="_blank" rel="noopener">reference: https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370</a></p>
+<p>Contract testing是一种确保两个系统可以兼容的一种测试方法，比如两个微服务之间。Contract记录了两个服务之间的互动，来确保两个系统都遵守了他们之间约定的合同。</p>
+<blockquote>
+<p>Contract testing is a methodology for ensuring that two separate systems (such as two microservices) are compatible with one other. It captures the interactions that are exchanged between each service, storing them in a contract, which can then be used to verify that both parties adhere to it.<br><a href="https://pactflow.io/blog/what-is-contract-testing/" target="_blank" rel="noopener">https://pactflow.io/blog/what-is-contract-testing/</a></p>
+</blockquote>
+<h2 id="听起来太抽象了？"><a href="#听起来太抽象了？" class="headerlink" title="听起来太抽象了？"></a>听起来太抽象了？</h2><p>其实就是比如一个别的组做的一个判断答案对错的API,答应我们组会返回给我们这样的结果</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"code"</span>: <span class="string">"100"</span>,</span><br><span class="line">    <span class="attr">"isSuccess"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"description"</span>: <span class="string">"Answers are correct"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们答应用他们的API的时候，发送这样的body</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"questionId"</span>: <span class="string">"101"</span>,</span><br><span class="line">    <span class="attr">"answer"</span>: <span class="string">"Yes"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如约定code是个string，那么就不能返回number给我们，也不能返回null，undefined给我们。</p>
+<p>我们答应answer是一个string，那么就不能发送boolean，或者number，或者null，undefined给他们。</p>
+<p>把这些约定都记录在contract里面，如果任何一方有新的deployment打破了之前的约定，我们就可以知道哪里和之前不一样了。或者有error的时候可以很快排查是否因为contract被破坏而产生，有助于解决bug。</p>
+<p>如果把contract test运行到pipeline上，设置一段时间自动运行一次，那么还可以提早知道，提供给我们服务的upstream，downstream是不是还和之前一样。反之一样，如果是API提供者，也可以测试自己每次改动升级是否还符合之前的contract。</p>
+<h2 id="分享其中一种用户驱动的contract-testing的一种方法-（customer-driven-contract-testing）"><a href="#分享其中一种用户驱动的contract-testing的一种方法-（customer-driven-contract-testing）" class="headerlink" title="分享其中一种用户驱动的contract testing的一种方法 （customer-driven contract testing）"></a>分享其中一种用户驱动的contract testing的一种方法 （customer-driven contract testing）</h2><p>有时候很难控制其他组是否进行contract testing，作为用这个API的组，我们依然可以只在我们这边做contract testing，也非常有帮助哦。</p>
+<p>方法有很多很多。</p>
+<p>这里具体的分享其中一种方法。</p>
+<p>用他 =&gt; <a href="https://www.npmjs.com/package/typescript-json-validator" target="_blank" rel="noopener">https://www.npmjs.com/package/typescript-json-validator</a></p>
+<p>定义这样的types在src/Example.ts里面</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">interface</span> ExampleType &#123;</span><br><span class="line">  value: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @TJS-format email</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  email?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @default 42</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  answer: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后可以轻松的生成validator哦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx typescript-json-validator src&#x2F;Example.ts ExampleType</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以这样用这个validate function了哦</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;readFileSync&#125; <span class="keyword">from</span> <span class="string">'fs'</span>;</span><br><span class="line"><span class="keyword">import</span> validate <span class="keyword">from</span> <span class="string">'./Example.validator.ts'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> value: unknown = <span class="built_in">JSON</span>.parse(readFileSync(process.argv[<span class="number">2</span>], <span class="string">'utf8'</span>));</span><br><span class="line"> </span><br><span class="line"><span class="comment">// this will through a clear error if `value` is not of the</span></span><br><span class="line"><span class="comment">// correct type. It will also fill in any default values</span></span><br><span class="line"><span class="keyword">const</span> validatedValue = validate(value);</span><br><span class="line"> </span><br><span class="line"><span class="built_in">console</span>.log(validatedValue.value);</span><br></pre></td></tr></table></figure>
+
+<p>如果别人break了contract我们这边就有error msg，可以具体的告诉我们是那个parameter变啦或者错啦。</p>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ios</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/06/2017-06-06-ios/">展开全文 >></a>
-        </p>
-      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
 
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/09/2020-05-09-contract-test/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/07/2020-05-07-regex/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">正则表达式 regex</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -239,85 +337,14 @@
 
 
 
-
-  
-    <article id="post-2017-06-06-ios-code" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/06/2017-06-06-ios-code/">2017-06-06【iOS可重复用代码】清内存</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/06/2017-06-06-ios-code/" class="archive-article-date">
-  	<time datetime="2017-06-06T02:26:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="清内存"><a href="#清内存" class="headerlink" title="清内存"></a>清内存</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">CGFloat size &#x3D; [SDImageCache sharedImageCache].getSize &#x2F; 1000.0 &#x2F; 1000;</span><br><span class="line"></span><br><span class="line">    if (size !&#x3D; 0) &#123;</span><br><span class="line">        if (indexPath.section &#x3D;&#x3D; 2 &amp;&amp; indexPath.row &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            [[SDImageCache sharedImageCache] clearDisk];</span><br><span class="line">            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];</span><br><span class="line">            [SVProgressHUD showWithStatus:@&quot;Deleting buffer memory...&quot;];</span><br><span class="line">            NSLog(@&quot;Delering buffer memory selected&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        [self.tableView reloadData];</span><br><span class="line">        [SVProgressHUD dismiss];</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ios</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/06/2017-06-06-ios-code/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -340,8 +367,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -164,6 +164,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-05-09-contract-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/09/2020-05-09-contract-test/">Contract test 的一个方法</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/09/2020-05-09-contract-test/" class="archive-article-date">
+  	<time datetime="2020-05-08T22:17:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是contract-test？"><a href="#什么是contract-test？" class="headerlink" title="什么是contract test？"></a>什么是contract test？</h2><p><img src="/2020/05/09/2020-05-09-contract-test/contract-testing-img.png" alt=""><br><a href="https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370" target="_blank" rel="noopener">reference: https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370</a></p>
+<p>Contract testing是一种确保两个系统可以兼容的一种测试方法，比如两个微服务之间。Contract记录了两个服务之间的互动，来确保两个系统都遵守了他们之间约定的合同。</p>
+<blockquote>
+<p>Contract testing is a methodology for ensuring that two separate systems (such as two microservices) are compatible with one other. It captures the interactions that are exchanged between each service, storing them in a contract, which can then be used to verify that both parties adhere to it.<br><a href="https://pactflow.io/blog/what-is-contract-testing/" target="_blank" rel="noopener">https://pactflow.io/blog/what-is-contract-testing/</a></p>
+</blockquote>
+<h2 id="听起来太抽象了？"><a href="#听起来太抽象了？" class="headerlink" title="听起来太抽象了？"></a>听起来太抽象了？</h2><p>其实就是比如一个别的组做的一个判断答案对错的API,答应我们组会返回给我们这样的结果</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"code"</span>: <span class="string">"100"</span>,</span><br><span class="line">    <span class="attr">"isSuccess"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"description"</span>: <span class="string">"Answers are correct"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们答应用他们的API的时候，发送这样的body</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"questionId"</span>: <span class="string">"101"</span>,</span><br><span class="line">    <span class="attr">"answer"</span>: <span class="string">"Yes"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如约定code是个string，那么就不能返回number给我们，也不能返回null，undefined给我们。</p>
+<p>我们答应answer是一个string，那么就不能发送boolean，或者number，或者null，undefined给他们。</p>
+<p>把这些约定都记录在contract里面，如果任何一方有新的deployment打破了之前的约定，我们就可以知道哪里和之前不一样了。或者有error的时候可以很快排查是否因为contract被破坏而产生，有助于解决bug。</p>
+<p>如果把contract test运行到pipeline上，设置一段时间自动运行一次，那么还可以提早知道，提供给我们服务的upstream，downstream是不是还和之前一样。反之一样，如果是API提供者，也可以测试自己每次改动升级是否还符合之前的contract。</p>
+<h2 id="分享其中一种用户驱动的contract-testing的一种方法-（customer-driven-contract-testing）"><a href="#分享其中一种用户驱动的contract-testing的一种方法-（customer-driven-contract-testing）" class="headerlink" title="分享其中一种用户驱动的contract testing的一种方法 （customer-driven contract testing）"></a>分享其中一种用户驱动的contract testing的一种方法 （customer-driven contract testing）</h2><p>有时候很难控制其他组是否进行contract testing，作为用这个API的组，我们依然可以只在我们这边做contract testing，也非常有帮助哦。</p>
+<p>方法有很多很多。</p>
+<p>这里具体的分享其中一种方法。</p>
+<p>用他 =&gt; <a href="https://www.npmjs.com/package/typescript-json-validator" target="_blank" rel="noopener">https://www.npmjs.com/package/typescript-json-validator</a></p>
+<p>定义这样的types在src/Example.ts里面</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">interface</span> ExampleType &#123;</span><br><span class="line">  value: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @TJS-format email</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  email?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @default 42</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  answer: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后可以轻松的生成validator哦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx typescript-json-validator src&#x2F;Example.ts ExampleType</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以这样用这个validate function了哦</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;readFileSync&#125; <span class="keyword">from</span> <span class="string">'fs'</span>;</span><br><span class="line"><span class="keyword">import</span> validate <span class="keyword">from</span> <span class="string">'./Example.validator.ts'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> value: unknown = <span class="built_in">JSON</span>.parse(readFileSync(process.argv[<span class="number">2</span>], <span class="string">'utf8'</span>));</span><br><span class="line"> </span><br><span class="line"><span class="comment">// this will through a clear error if `value` is not of the</span></span><br><span class="line"><span class="comment">// correct type. It will also fill in any default values</span></span><br><span class="line"><span class="keyword">const</span> validatedValue = validate(value);</span><br><span class="line"> </span><br><span class="line"><span class="built_in">console</span>.log(validatedValue.value);</span><br></pre></td></tr></table></figure>
+
+<p>如果别人break了contract我们这边就有error msg，可以具体的告诉我们是那个parameter变啦或者错啦。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/09/2020-05-09-contract-test/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-05-07-regex" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -888,72 +979,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/24/2020-04-24-how-to-find-your-career/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2020-04-19-js-execution-context" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/19/2020-04-19-js-execution-context/">关于JavaScript你可能没仔细思考过的概念 -- Execution Contexts, Hoisting, Scopes, Closures</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/19/2020-04-19-js-execution-context/" class="archive-article-date">
-  	<time datetime="2020-04-19T04:56:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>Execution Contexts</code> 可执行上下文。</p>
-<blockquote>
-<p>Memory Leak 内存泄漏时不再使用、用不到、访问不到的变量，依然占据着内存空间，不能再次利用起来，造成内存的浪费。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/19/2020-04-19-js-execution-context/">展开全文 >></a>
         </p>
       
 
