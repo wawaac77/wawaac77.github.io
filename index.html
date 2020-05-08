@@ -164,6 +164,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-05-09-js-interesting-bug" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/09/2020-05-09-js-interesting-bug/">Javascript的不小心会触发的bug</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/09/2020-05-09-js-interesting-bug/" class="archive-article-date">
+  	<time datetime="2020-05-08T23:01:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>试试在JavaScript里面，运行<code>0.1 + 0.2</code>，输出结果。</p>
+<p>结果是什么呢？我们心想，好简单哦，肯定是<code>0.3</code>呀~</p>
+<p>运行一下, 有点惊讶哦，其实是…<code>0.30000000000000004</code></p>
+<p><img src="/2020/05/09/2020-05-09-js-interesting-bug/js-adding-float.png" alt=""></p>
+<h3 id="为什么简单的有限小数点的小数相加，结果不是我们预期的呢？"><a href="#为什么简单的有限小数点的小数相加，结果不是我们预期的呢？" class="headerlink" title="为什么简单的有限小数点的小数相加，结果不是我们预期的呢？"></a>为什么简单的有限小数点的小数相加，结果不是我们预期的呢？</h3><p>因为电脑用来存储小数float的format是<code>binary floating point</code>。（我们都知道数字在计算机里面是用二进制存储的嘛，小数当然也一样了。）</p>
+<p>而<code>binary floating point</code>根本不可能准确的代表像0.1, 0.2, 0.3 这样的数字。</p>
+<p>就像<code>decimal number</code>不可能准确代表 1/3，<code>binary floating point</code>不可能准确代表0.1。他们都只是一种format而已。</p>
+<h3 id="怎么解决呢？"><a href="#怎么解决呢？" class="headerlink" title="怎么解决呢？"></a>怎么解决呢？</h3><p>记得把他们约等于起来呀，固定小数点的位数呀！</p>
+<p>固定小数点的个数，number是被操作的数字，x是小数点个数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">number.toFixed(x)</span><br></pre></td></tr></table></figure>
+<p>这个方法返回的是一个<strong>string</strong>哦！</p>
+<p>而且它是四舍五入的，不是trim掉后面的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.14159</span>.toFixed(<span class="number">2</span>);              <span class="comment">// 3.14 returns a string</span></span><br><span class="line"><span class="number">3.14888</span>.toFixed(<span class="number">2</span>);              <span class="comment">// 3.15 returns a string</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="number">3.14159</span>.toFixed(<span class="number">2</span>));  <span class="comment">// 3.14 returns a number</span></span><br></pre></td></tr></table></figure>
+
+<p>想要向下约等于的话</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.floor(<span class="number">3.14888</span> * <span class="number">100</span>) / <span class="number">100</span>  <span class="comment">// 3.14 return a number, digits after 4 are trimed</span></span><br></pre></td></tr></table></figure>
+
+
+<p>各种约等于</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.round(<span class="number">3.14159</span>)  <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">3.5</span>)      <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">3.8</span>)      <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">3.2</span>)       <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h4><p><a href="https://floating-point-gui.de/basic/" target="_blank" rel="noopener">https://floating-point-gui.de/basic/</a></p>
+<p><a href="https://pawelgrzybek.com/rounding-and-truncating-numbers-in-javascript/" target="_blank" rel="noopener">https://pawelgrzybek.com/rounding-and-truncating-numbers-in-javascript/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">javascript, typescript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/09/2020-05-09-js-interesting-bug/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-05-09-contract-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -903,82 +1000,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/26/2020-04-26-how-to-be-an-intelligent-person/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2020-04-24-how-to-find-your-career" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/24/2020-04-24-how-to-find-your-career/">如何找到适合自己的职业？</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/24/2020-04-24-how-to-find-your-career/" class="archive-article-date">
-  	<time datetime="2020-04-23T23:04:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>什么专业适合自己？该选择什么样的工作？我想很多人都思考过这个问题。很多已经成功的人，包括乔布斯等人都会说，找到你热爱的事情，那就是你的事业，坚持做自己热爱的事情，就一定会成功。</p>
-<p>再问多一步，怎么找到自己热爱的事情？什么是自己热爱的事情？</p>
-<h4 id="秘密是：热爱是精通的副产品。"><a href="#秘密是：热爱是精通的副产品。" class="headerlink" title="秘密是：热爱是精通的副产品。"></a>秘密是：热爱是精通的副产品。</h4><p>而要在某方面擅长，这需要时间。关键是，要强迫自己去完成工作，强迫技能形成，这是最难的阶段。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">reading</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/24/2020-04-24-how-to-find-your-career/">展开全文 >></a>
         </p>
       
 
