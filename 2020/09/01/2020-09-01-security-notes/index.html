@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>如何测试display none？ | Hexo</title>
+  <title>What everyone must know about security | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="之前的文章中提到可以通过 set display: none 这样的 style 来控制 component 不显示。 12345678910111213141516171819202122export const StyledContainer &#x3D; styled.div&#96;  #page-print &amp;#123;    display: none;  &amp;#125;  @media">
+  <meta name="description" content="Never push credential, secrets, password to a public repo or even private repo as plain text  CIA - confidentiality, integrity, availability  POLP - principle of least Privilege  start with minimum a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何测试display none？">
-<meta property="og:url" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/index.html">
+<meta property="og:title" content="What everyone must know about security">
+<meta property="og:url" content="http://yoursite.com/2020/09/01/2020-09-01-security-notes/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="之前的文章中提到可以通过 set display: none 这样的 style 来控制 component 不显示。 12345678910111213141516171819202122export const StyledContainer &#x3D; styled.div&#96;  #page-print &amp;#123;    display: none;  &amp;#125;  @media">
+<meta property="og:description" content="Never push credential, secrets, password to a public repo or even private repo as plain text  CIA - confidentiality, integrity, availability  POLP - principle of least Privilege  start with minimum a">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png">
-<meta property="article:published_time" content="2020-05-07T10:14:26.000Z">
-<meta property="article:modified_time" content="2020-05-07T10:49:15.010Z">
+<meta property="article:published_time" content="2020-08-31T22:28:51.000Z">
+<meta property="article:modified_time" content="2020-08-31T22:29:31.672Z">
 <meta property="article:author" content="Alice Jin">
-<meta property="article:tag" content="TDD, react-testing-liabrary">
+<meta property="article:tag" content="security">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -169,38 +167,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2020-05-07-test-display-none" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2020-09-01-security-notes" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      如何测试display none？
+      What everyone must know about security
     </h1>
   
 
         
-        <a href="/2020/05/07/2020-05-07-test-display-none/" class="archive-article-date">
-  	<time datetime="2020-05-07T10:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+        <a href="/2020/09/01/2020-09-01-security-notes/" class="archive-article-date">
+  	<time datetime="2020-08-31T22:28:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前的文章中提到可以通过 set <code>display: none</code> 这样的 style 来控制 component 不显示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export const StyledContainer &#x3D; styled.div&#96;</span><br><span class="line">  #page-print &#123;</span><br><span class="line">    display: none;</span><br><span class="line">  &#125;</span><br><span class="line">  @media print &#123;</span><br><span class="line">    #page-print &#123;</span><br><span class="line">      display: block;</span><br><span class="line">    &#125;</span><br><span class="line">    #page-screen &#123;</span><br><span class="line">      display: none;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#96;;</span><br><span class="line"></span><br><span class="line">const page &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;StyledContainer&gt;</span><br><span class="line">      &lt;div id&#x3D;&quot;page-screen&quot;&gt;I&#39;m looking at the browser.&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div id&#x3D;&quot;page-print&quot;&gt;I&#39;m printing.&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;StyledContainer&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="但是要怎么样测试它呢？"><a href="#但是要怎么样测试它呢？" class="headerlink" title="但是要怎么样测试它呢？"></a>但是要怎么样测试它呢？</h3><p>看看下面的测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import &#123; render &#125; from &quot;@testing-library&#x2F;react&quot;;</span><br><span class="line"></span><br><span class="line">const renderComponent &#x3D; component &#x3D;&gt; &#123;</span><br><span class="line">  return render(&#123; compoent &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">it(&quot;should not see print page when it is not print mode&quot;, () &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; getByText &#125; &#x3D; renderComponent(&lt;StyledContainer &#x2F;&gt;);</span><br><span class="line">  expect(getByText(&quot;I&#39;m printing.&quot;)).not.toBeInTheDocument();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>可以做到我们想做的吗？</p>
-<p>上面的测试会fail哦！</p>
-<p>因为print-page这个element还在DOM里面，在Document里面，只是设置了不display而已。</p>
-<p><strong>而且</strong>，这里有一个JSDOM limitation，css没有load到document里面。这个是<code>react-testing-library</code>的作者说的哦。</p>
-<p><img src="/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png" alt=""></p>
-<p>所以怎么办呢？ 这个stackOverflow的答案可能有帮助哦<br>[<a href="https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]" target="_blank" rel="noopener">https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]</a></p>
+        <ol>
+<li><p>Never push credential, secrets, password to a public repo or even private repo as plain text</p>
+</li>
+<li><p>CIA - confidentiality, integrity, availability</p>
+</li>
+<li><p>POLP - principle of least Privilege</p>
+<ol>
+<li>start with minimum access and permissions, only add permission when it is needed.</li>
+<li>the access should be temporary. No need to perminently access to production env or database</li>
+</ol>
+</li>
+<li><p>Always trouble shoot in the dev environment, do NOT jump straight to the production environment</p>
+</li>
+<li><p>Avoid manual access and write to the production env. Use the code to access. The code has to push to build pipeline first. Only when the pipeline is green, the set of code can be used.</p>
+</li>
+</ol>
 
       
 
@@ -235,7 +237,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">TDD, react-testing-liabrary</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">security</a>
         		</li>
       		
 		</ul>
@@ -291,7 +293,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/07/2020-05-07-test-display-none/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/01/2020-09-01-security-notes/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -305,18 +307,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/07/2020-05-07-jest-spyon/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          jest spyOn怎么用呢？
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/05/03/2020-05-03-print-mode-browser/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Chrome设置print模式</div>
+    <a href="/2020/07/11/2020-07-11-pair-programming/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Pair programming的心得</div>
       <i class="icon-circle-right"></i>
     </a>
   
