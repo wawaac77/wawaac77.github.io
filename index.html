@@ -184,7 +184,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
+        <ul>
 <li><p>node search layer by layer, deeper and deeper, until it finds the corresponding package</p>
 </li>
 <li><p>If two packages depend on the same package, but different version. Node_module will keep the two version of the same package.</p>
@@ -192,9 +192,9 @@
 <li><p>The installation order matters. Not every npm install or yarn install, will result in the same node_module structure.</p>
 </li>
 <li><p><code>npm ci</code> =&gt; will only check <code>package-lock.json</code> and build the exact same version. This is recommended to use in the pipleine, so that it can generate the exact same node_module and every build is predictable</p>
-<p> <code>yarn install --frozen-lockfile</code></p>
+<p>  <code>yarn install --frozen-lockfile</code></p>
 </li>
-</ol>
+</ul>
 
       
 
@@ -268,7 +268,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
+        <ul>
 <li><p>Never push credential, secrets, password to a public repo or even private repo as plain text</p>
 </li>
 <li><p>CIA - confidentiality, integrity, availability</p>
@@ -283,7 +283,7 @@
 </li>
 <li><p>Avoid manual access and write to the production env. Use the code to access. The code has to push to build pipeline first. Only when the pipeline is green, the set of code can be used.</p>
 </li>
-</ol>
+</ul>
 
       
 
