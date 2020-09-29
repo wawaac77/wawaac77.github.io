@@ -6,22 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>如何测试display none？ | Hexo</title>
+  <title>2020-09-29-inception | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="之前的文章中提到可以通过 set display: none 这样的 style 来控制 component 不显示。 12345678910111213141516171819202122export const StyledContainer &#x3D; styled.div&#96;  #page-print &amp;#123;    display: none;  &amp;#125;  @media">
+  <meta name="description" content="So how do different roles contribute?Eugene and TC have shared lots of great things about inception. I feel I have learnt new things too. So, I’d like to summarize my learning and give a brief summary">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何测试display none？">
-<meta property="og:url" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/index.html">
+<meta property="og:title" content="2020-09-29-inception">
+<meta property="og:url" content="http://yoursite.com/2020/09/29/2020-09-29-inception/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="之前的文章中提到可以通过 set display: none 这样的 style 来控制 component 不显示。 12345678910111213141516171819202122export const StyledContainer &#x3D; styled.div&#96;  #page-print &amp;#123;    display: none;  &amp;#125;  @media">
+<meta property="og:description" content="So how do different roles contribute?Eugene and TC have shared lots of great things about inception. I feel I have learnt new things too. So, I’d like to summarize my learning and give a brief summary">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png">
-<meta property="article:published_time" content="2020-05-07T10:14:26.000Z">
-<meta property="article:modified_time" content="2020-05-07T10:49:15.010Z">
+<meta property="article:published_time" content="2020-09-29T06:21:15.000Z">
+<meta property="article:modified_time" content="2020-09-29T06:22:12.900Z">
 <meta property="article:author" content="Alice Jin">
-<meta property="article:tag" content="TDD, react-testing-liabrary">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -169,38 +166,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2020-05-07-test-display-none" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2020-09-29-inception" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      如何测试display none？
+      2020-09-29-inception
     </h1>
   
 
         
-        <a href="/2020/05/07/2020-05-07-test-display-none/" class="archive-article-date">
-  	<time datetime="2020-05-07T10:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+        <a href="/2020/09/29/2020-09-29-inception/" class="archive-article-date">
+  	<time datetime="2020-09-29T06:21:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前的文章中提到可以通过 set <code>display: none</code> 这样的 style 来控制 component 不显示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export const StyledContainer &#x3D; styled.div&#96;</span><br><span class="line">  #page-print &#123;</span><br><span class="line">    display: none;</span><br><span class="line">  &#125;</span><br><span class="line">  @media print &#123;</span><br><span class="line">    #page-print &#123;</span><br><span class="line">      display: block;</span><br><span class="line">    &#125;</span><br><span class="line">    #page-screen &#123;</span><br><span class="line">      display: none;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#96;;</span><br><span class="line"></span><br><span class="line">const page &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;StyledContainer&gt;</span><br><span class="line">      &lt;div id&#x3D;&quot;page-screen&quot;&gt;I&#39;m looking at the browser.&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div id&#x3D;&quot;page-print&quot;&gt;I&#39;m printing.&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;StyledContainer&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="但是要怎么样测试它呢？"><a href="#但是要怎么样测试它呢？" class="headerlink" title="但是要怎么样测试它呢？"></a>但是要怎么样测试它呢？</h3><p>看看下面的测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import &#123; render &#125; from &quot;@testing-library&#x2F;react&quot;;</span><br><span class="line"></span><br><span class="line">const renderComponent &#x3D; component &#x3D;&gt; &#123;</span><br><span class="line">  return render(&#123; compoent &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">it(&quot;should not see print page when it is not print mode&quot;, () &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; getByText &#125; &#x3D; renderComponent(&lt;StyledContainer &#x2F;&gt;);</span><br><span class="line">  expect(getByText(&quot;I&#39;m printing.&quot;)).not.toBeInTheDocument();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>可以做到我们想做的吗？</p>
-<p>上面的测试会fail哦！</p>
-<p>因为print-page这个element还在DOM里面，在Document里面，只是设置了不display而已。</p>
-<p><strong>而且</strong>，这里有一个JSDOM limitation，css没有load到document里面。这个是<code>react-testing-library</code>的作者说的哦。</p>
-<p><img src="/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png" alt=""></p>
-<p>所以怎么办呢？ 这个stackOverflow的答案可能有帮助哦<br>[<a href="https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]" target="_blank" rel="noopener">https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]</a></p>
+        <p>So how do different roles contribute?<br>Eugene and TC have shared lots of great things about inception. I feel I have learnt new things too. So, I’d like to summarize my learning and give a brief summary of the whole inception journey. So that we can link up what we have learnt. Also I think it will be interesting to share some first hand experience from a developer perspective. </p>
+<p>To prepare for this session, I’ve interviewed some people from different roles to ask about their experience and opinions.</p>
+<p>Inception can be in different formats or different flavors. It doesn’t have to be exactly the same. But the process is very similar.</p>
+<p>Ideal Products<br>To start with the inception, we ask questions. When we talk with clients or product owners, there are usually two possible situations. One is that they don’t know what exactly they want, while the other is that they know what they want but they don’t know how large the project would be, or how long it might take.</p>
+<p>If they don’t know what exactly they want, we will ask questions about their pain points. So that we can put up what they want. When the product owners know what they want, but don’t know how long it will take. We will ask questions about risks, dependencies. Like what service is ready, which is not ready. What are we depending on? What can be a trade-off? Time, cost, scope, user experience. Like Eugege &amp; TC mentioned previously.</p>
+<p>Also, we can ask what their ideal product is. This can help us clarify the direction.</p>
+<p>Product Roadmap<br>When building the product roadmap mentioned previously, everyone can help with the process, including developers, QAs, designers, and BAs.</p>
+<p>This process could help us find out some really good features. These awesome ideas will be noted down. And after recording those brilliant ideas, people will vote for the features. Usually all the teammates, like UI/UX designers, BAs, product owners, devs and QAs can vote. And usually the business and product people should take a larger percentage for the vote. </p>
+<p>Features<br>Then these features will be clustered into “Must have”, “Should have” , “Could have”, and “wouldn’t have”. For example here is a feature to consider, our level up cafe app could email customers on what they’ve ordered and what time it will be delivered. It’s nice to have this feature, but customers can still order without this feature. So this feature will be a “could have” feature. (ask people)</p>
+<p>Understand the tech environment<br>Tech people at this time will also ask questions like<br>What’s the current tech stack? This will impact the technology selection.<br>What’s the system integration points in the existing system? How many users are we going to support? Is this feature something other departments of our company already built, or some 3rd party service we should purchase? Any dependencies, and tech challenges?<br>Any risks to delivery of the project? </p>
+<p>Then we will forecast the technical architecture to achieve technical goals.</p>
+<p>During this process, we will have facilitators to write down the key questions and answers. Anyone can be the facilitator. One tip here is that, if you are a facilitator, make sure everyone is sticking to the topic. Do bring people back when the discussion is out of topic for quite some time. </p>
+<p>Breaking into stories &amp; Estimation<br>The important features will be breaking down into small stories. And developers and QAs will think about the implementation details at a high level. And estimate the stories. Give each story a rough point. What we did previously in real cases: We will have many physical cards. We will write the brief story description on the card, and write the estimated story points at the back of the card.</p>
+<p>Usually we will take 3 iterations as an example. Usually one iteration is two week. The team, especially developers and QAs will pick the stories to fill in each iteration without looking at the point on the stories. Just by thinking how many cards can be finished within one iteration, given e.g. we have 4 developers and 1 QA in the team. After doing this, we will flip over the cards, to add up together the stories points of each iteration. We will do this 3 times for 3 iterations. Then we make an average. Then we will know how many points can be finished by each dev pair. </p>
+<p>Then with how many people we have, we can calculate an estimated timeline.</p>
+<p>Also, we will add an overall buffer to the estimated timeline, in case anything unexpected or missed.</p>
+<p>Then a delivery plan will be there. Just keep in mind that story points usually represent the complexity of a task not how many days. As we are applying an agile process, the delivery plan is flexible too when the market changes. Story point is just one of the tools that helps predict team velocity. We learn and adjust the plan reactively as the project goes. If you want to know more details about breaking into user stories, our next episode will cover more details on it. Welcome to join if you think that’s interesting.</p>
+<p>MVP<br>The timeline for a full feature product can be very long. Very often, Product owners would prefer to build the MVP(minimum viable product) to prove their concept, test the market, or have a quicker feedback cycle. Take our level up cafe app as an example: selecting delivery time could be a nice feature, but in MVP, we can default that the food will be delivered once it is ordered. And in future releases, this feature could be included then. By doing these cut offs ,we can have our MVP. And we will estimate a date for finishing the MVP. Then for all the stories together, we’ll estimate another time for full release.</p>
+<p>Till now, we will have a plan. We will showcase to the related people and departments and get some more feedback. </p>
+<p>Summary<br>By working collaboratively between different roles, we will achieve a very good plan and accomplish a successful inception.</p>
+<p>Q&amp;A<br>So this will be our main content today. We are very happy to answer questions in the Q&amp;A column</p>
+<p>MC<br>Start<br>Hello, everyone! Welcome to level up, Episode 2. First of all, thank you for taking the time to join the event. I believe we’re gonna have a fun evening full of knowledge and inspiration. I’m Alice. Tonight I’ll be your MC. I’m a software developer, a consultant from ThoughtWorks in Melbourne. </p>
+<p>Housekeeping<br>To start with, let’s share some housekeeping stuff. Questions for presenters. Feel free to put them in the Q&amp;A column down there. You can see them. And you can vote for them. Don’t worry. There are no stupic questions. But if you feel like you don’t want to be known who’s asking, you can ask them anonymously. </p>
+<p>You can also see on the bottom, there is a button called chat. In there, the presenters may ask questions that you can interact with. You can put your answers in the chat. You are also welcome to turn it in to all panelists and attendees. So that everyone else can see the answers there. Have a chat or have a discussion there if you like. We cannot hear or see you. So the chat is a good way to get some interaction with us. </p>
+<p>Towards the end of the session, we’re gonna send a link to the feedback form. There will be an email coming out a little bit afterwards to collect feedback too. We really love your feedback. About this session, about the content, about the presentation. Your feedback means a lot to us. It can help us to improve and make our next session and season even better.</p>
+<p>Launch the poll<br>I’ll also quickly launch a poll right now. Just one question poll, for getting a little bit feel on who’s here. What is your level of experience now? Just take a few seconds to answer it now. Don’t worry. It’s anonymous. Hopefully this gonna give us to understand what sort of experience level you have, so that we can tailor our examples and explanations on that.</p>
+<p>(I’m gonna end the poll in 5 seconds.)</p>
+<p>About LevelUp<br>Also, just wanna give a brief introduction to level up. It’s a program that has been running since 2013. Designed to help people to get a better start in IT career. We noticed there is a gap between what traditional education like bootchamps, and university courses, and the skills you are gonna need when you get your first job. So level up is a program designed to address that gap. </p>
+<p>Why LevelUp now?<br>Earlier this year, we had to cancel our planned in-personal events in Melbourne and Sydney. However,  by responding to change, applying agile thinking, we are able to bring you this new format of the level up. We had our first season earlier this year. And this is season 2. </p>
+<p>For this season, we have 6 episodes. The first episode was accomplished with great success last Tuesday. And today is Episode 2. Today we are going to hear great people from ThoughtWorks sharing their experience about one of the most important parts of the agile development process, which is Inception! </p>
+<p>During this season, we’re gonna follow a sort of agile development process and cover topics from Discovery to Delivery. It’s okay if you missed the first episode. I believe you will learn a lot from each episode. You can find the links for all these events on our website. Levelup.thoughtworks.com</p>
+<p>And similar with this one, you can just simply click to register. (7min 35s)</p>
+<p>Introduce presenters<br>Today we’ve also invited Eugege and TC as our presenters.</p>
+<p>Eugene<br>It’s my pleasure to introduce Eugene. Eugene is our senior business analyst from ThoughtWorks. Eugene is good at helping teams realise their full potential and deliver great results. He is a pragmatic leader who can sharpen a team’s focus, bring disciplined approach to software development. He has years of delivery experience in different roles (Presales, IM, PO, Solution Architect). During his career,  Eugene has worked in telecom, fintech, entertainment, real estate industries. And he has delivered complex solutions across the globe.</p>
+<p>TC<br>We also have our lovely TC. TC is our lead experience designer. She has been designing usable, useful and engaging interfaces for a variety of clients in Australia and around the world since 1994. She has a passion for good design and seeks to understand human behaviour and how to support it through technology. She creates innovative and effective solutions. She has deep analytical and design skills. She has powerful communication techniques and the ability to share. She has also been mentoring a number of juniors within ThoughtWorks.</p>
+<p>Let’s get started<br>So without further ado, let’s get started. I’ll hand it over to Eugene.<br>Eugene, can you please share with us what’s the focus of today.</p>
+<p>Questions for Eugene<br>Can anything go wrong? And how to mitigate proactively?<br>How would we know if it’s successful?<br>what do you struggle with? What you miss?</p>
+<p>Questions for TC<br>Can you please show us how to plan out inceptions briefly?<br>Can you please give us some examples of building roadmaps?</p>
+<p>Ending<br>Thank you for spending this wonderful evening together with us! Our next episode is about iterating and user stories. We’ll be discussing how to manage requirements in agile projects and why high performing teams involve quality analysts early in the process, often before any code has been written.It will be very interesting too. </p>
+<p>Also, thanks to the awesome people that put huge effort on preparing the events. Most importantly, thank you for attending the event today. We love to hear some feedback from you. Also, hope everyone got inspired! And, see you next time!</p>
 
       
 
@@ -230,17 +255,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">TDD, react-testing-liabrary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -291,7 +305,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/07/2020-05-07-test-display-none/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/29/2020-09-29-inception/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -305,18 +319,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/07/2020-05-07-jest-spyon/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          jest spyOn怎么用呢？
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/05/03/2020-05-03-print-mode-browser/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Chrome设置print模式</div>
+    <a href="/2020/09/16/2020-09-16-floating-point/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2020-09-16-floating-point</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>如何测试display none？ | Hexo</title>
+  <title>AWS Cert Note | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="之前的文章中提到可以通过 set display: none 这样的 style 来控制 component 不显示。 12345678910111213141516171819202122export const StyledContainer &#x3D; styled.div&#96;  #page-print &amp;#123;    display: none;  &amp;#125;  @media">
+  <meta name="description" content="Aws fundamentals AWS Regionsnaming convension: us-east-1a region is a cluster of data center most aws are region-scoped AZ: availability Zones  Each region has many AZ  usually 3, min 2, max 6   AZ ar">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何测试display none？">
-<meta property="og:url" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/index.html">
+<meta property="og:title" content="AWS Cert Note">
+<meta property="og:url" content="http://yoursite.com/2020/09/03/2020-09-03-aws-cert-note/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="之前的文章中提到可以通过 set display: none 这样的 style 来控制 component 不显示。 12345678910111213141516171819202122export const StyledContainer &#x3D; styled.div&#96;  #page-print &amp;#123;    display: none;  &amp;#125;  @media">
+<meta property="og:description" content="Aws fundamentals AWS Regionsnaming convension: us-east-1a region is a cluster of data center most aws are region-scoped AZ: availability Zones  Each region has many AZ  usually 3, min 2, max 6   AZ ar">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png">
-<meta property="article:published_time" content="2020-05-07T10:14:26.000Z">
-<meta property="article:modified_time" content="2020-05-07T10:49:15.010Z">
+<meta property="article:published_time" content="2020-09-03T10:52:09.000Z">
+<meta property="article:modified_time" content="2020-09-16T12:03:03.675Z">
 <meta property="article:author" content="Alice Jin">
-<meta property="article:tag" content="TDD, react-testing-liabrary">
+<meta property="article:tag" content="aws">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -169,38 +167,122 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2020-05-07-test-display-none" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2020-09-03-aws-cert-note" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      如何测试display none？
+      AWS Cert Note
     </h1>
   
 
         
-        <a href="/2020/05/07/2020-05-07-test-display-none/" class="archive-article-date">
-  	<time datetime="2020-05-07T10:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+        <a href="/2020/09/03/2020-09-03-aws-cert-note/" class="archive-article-date">
+  	<time datetime="2020-09-03T10:52:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前的文章中提到可以通过 set <code>display: none</code> 这样的 style 来控制 component 不显示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export const StyledContainer &#x3D; styled.div&#96;</span><br><span class="line">  #page-print &#123;</span><br><span class="line">    display: none;</span><br><span class="line">  &#125;</span><br><span class="line">  @media print &#123;</span><br><span class="line">    #page-print &#123;</span><br><span class="line">      display: block;</span><br><span class="line">    &#125;</span><br><span class="line">    #page-screen &#123;</span><br><span class="line">      display: none;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#96;;</span><br><span class="line"></span><br><span class="line">const page &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;StyledContainer&gt;</span><br><span class="line">      &lt;div id&#x3D;&quot;page-screen&quot;&gt;I&#39;m looking at the browser.&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div id&#x3D;&quot;page-print&quot;&gt;I&#39;m printing.&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;StyledContainer&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <p>Aws fundamentals</p>
+<p>AWS Regions<br>naming convension: us-east-1<br>a region is a cluster of data center</p>
+<p>most aws are region-scoped</p>
+<p>AZ: availability Zones</p>
+<ul>
+<li><p>Each region has many AZ</p>
+<ul>
+<li>usually 3, min 2, max 6</li>
+</ul>
+</li>
+<li><p>AZ are location isolated, but connected through bandwith</p>
+</li>
+</ul>
+<h2 id="IAM-Identity-and-Access-Management"><a href="#IAM-Identity-and-Access-Management" class="headerlink" title="IAM - Identity and Access Management"></a>IAM - Identity and Access Management</h2><p>Users<br>Groups<br>Roles</p>
+<p>Root account should never be used and shared, except for initial setup.</p>
+<p>IAM is ath teh center of AWS</p>
+<p>Policies =&gt; JSON document</p>
+<p>Users =&gt; usually a physical person<br>Groups =&gt; functions (admins, devOps<br>    Teams<br>Roles =&gt; internal usage</p>
+<p>IAM has a global view, across all the locations</p>
+<p>least privilege principles</p>
+<p>IAM Federation<br>SAML standard</p>
+<ul>
+<li>One IAM Role per Application</li>
+<li>IAM credentials never shared</li>
+</ul>
+<h2 id="EC2"><a href="#EC2" class="headerlink" title="EC2"></a>EC2</h2><ul>
+<li>renting virtual machines EC2</li>
+<li>sotring data on virtual drives EBS</li>
+<li>distributing load across machines ELB</li>
+<li>scaling the services using an auto-scaling group ASG</li>
+</ul>
+<p><em>common exam question</em>: Permissions 0666 for ‘EC2Tutorial.pem’ are too open.<br><em>solution</em>: chmod 0400 EC2Tutorial.pem</p>
+<p>logout: control + D /exit</p>
+<h2 id="Security-groups"><a href="#Security-groups" class="headerlink" title="Security groups"></a>Security groups</h2><ul>
+<li>can atteched to multiple instances</li>
+<li>locked down to a region / VPC combination</li>
+<li>security groups are like firewall</li>
+</ul>
+<h2 id="Private-vs-Public-IP-IPv4"><a href="#Private-vs-Public-IP-IPv4" class="headerlink" title="Private vs. Public IP IPv4"></a>Private vs. Public IP IPv4</h2><ul>
+<li>IPv6 =&gt; common for IoT</li>
+<li>Public IP: machine can be identified on the internet</li>
+<li>Private IP: machine can only be identified on a private network only</li>
+<li>Elastic IPs - try to avoid using Elastic IP</li>
+<li>ifconfig -a</li>
+</ul>
+<h2 id="Apache-Server"><a href="#Apache-Server" class="headerlink" title="Apache Server"></a>Apache Server</h2><h2 id="questions"><a href="#questions" class="headerlink" title="questions:"></a>questions:</h2><pre><code>All of these are IAM components except... =&gt; organisation
 
-<h3 id="但是要怎么样测试它呢？"><a href="#但是要怎么样测试它呢？" class="headerlink" title="但是要怎么样测试它呢？"></a>但是要怎么样测试它呢？</h3><p>看看下面的测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import &#123; render &#125; from &quot;@testing-library&#x2F;react&quot;;</span><br><span class="line"></span><br><span class="line">const renderComponent &#x3D; component &#x3D;&gt; &#123;</span><br><span class="line">  return render(&#123; compoent &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">it(&quot;should not see print page when it is not print mode&quot;, () &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; getByText &#125; &#x3D; renderComponent(&lt;StyledContainer &#x2F;&gt;);</span><br><span class="line">  expect(getByText(&quot;I&#39;m printing.&quot;)).not.toBeInTheDocument();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>可以做到我们想做的吗？</p>
-<p>上面的测试会fail哦！</p>
-<p>因为print-page这个element还在DOM里面，在Document里面，只是设置了不display而已。</p>
-<p><strong>而且</strong>，这里有一个JSDOM limitation，css没有load到document里面。这个是<code>react-testing-library</code>的作者说的哦。</p>
-<p><img src="/2020/05/07/2020-05-07-test-display-none/twitter_css_not_loaded.png" alt=""></p>
-<p>所以怎么办呢？ 这个stackOverflow的答案可能有帮助哦<br>[<a href="https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]" target="_blank" rel="noopener">https://stackoverflow.com/questions/52813527/cannot-check-expectelm-not-tobevisible-for-semantic-ui-react-component]</a></p>
+An IAM user can belong to multiple groups =&gt; true</code></pre><h2 id="EC2-Instance-launch-types"><a href="#EC2-Instance-launch-types" class="headerlink" title="EC2 Instance launch types"></a>EC2 Instance launch types</h2><ul>
+<li><p>on demand instances: short workload, predicatable pricing</p>
+</li>
+<li><p>reserved: min 1 year</p>
+<ul>
+<li>long workloads<ul>
+<li>up to 75% discount</li>
+<li>reserve 1 or 3 years</li>
+</ul>
+</li>
+<li>convertible reserved instances: long workloads with flexible instance<ul>
+<li>up to 54% discont</li>
+</ul>
+</li>
+<li>scheduled reserved instances: every Thursday between 3-6pm (exam)</li>
+</ul>
+</li>
+<li><p>spot instance: short workload, cheeap, might lose instances</p>
+<ul>
+<li>up to 90% compared to on-demand</li>
+<li>workloads that are resilient to failure<ul>
+<li>pssible to retry</li>
+<li>data analysis</li>
+<li>image processing</li>
+<li>batch jobs</li>
+<li>not for critical jobs or databases</li>
+<li>reserved instances for baseline + on-demand &amp; spot for peaks</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>dedicated instances</p>
+<ul>
+<li>physical</li>
+<li>full control</li>
+<li>visibility into underlying socket/hardware</li>
+<li>for 3 year</li>
+<li>strong regulatory or compliance </li>
+<li>dedicated host (exam)</li>
+</ul>
+</li>
+<li><p>dedicated hosts: book an entire physical server</p>
+</li>
+<li><p>exam: discount based on type</p>
+</li>
+</ul>
+<h3 id="on-demond"><a href="#on-demond" class="headerlink" title="on demond"></a>on demond</h3><h2 id="instance-type"><a href="#instance-type" class="headerlink" title="instance type"></a>instance type</h2><ul>
+<li>exam: will choose which type</li>
+</ul>
 
       
 
@@ -235,7 +317,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">TDD, react-testing-liabrary</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">aws</a>
         		</li>
       		
 		</ul>
@@ -291,7 +373,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/07/2020-05-07-test-display-none/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/03/2020-09-03-aws-cert-note/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -305,18 +387,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/07/2020-05-07-jest-spyon/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/16/2020-09-16-floating-point/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          jest spyOn怎么用呢？
+          2020-09-16-floating-point
         
       </div>
     </a>
   
   
-    <a href="/2020/05/03/2020-05-03-print-mode-browser/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Chrome设置print模式</div>
+    <a href="/2020/09/02/2020-09-02-npm-yarn/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Interesing facts you might wanna know about &#34;yarn&#34; vs. &#34;npm&#34;</div>
       <i class="icon-circle-right"></i>
     </a>
   
