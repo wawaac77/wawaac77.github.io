@@ -164,6 +164,102 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-05-07-jest-spyon" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/07/2020-05-07-jest-spyon/">jest spyOn怎么用呢？</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/07/2020-05-07-jest-spyon/" class="archive-article-date">
+  	<time datetime="2020-05-07T10:51:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有时候我们从第三方 library 里面 import 了，或者自己写了一个 object，里面有我们想用的 function A，是给另外一个 function B 使用。</p>
+<p>我们想测试 B 真的用了 A 吗？怎么做呢？</p>
+<p><code>jest.spyOn</code>这个时候就可以很方面的帮到我们哦！</p>
+<blockquote>
+<p>jest.spyOn(object, methodName)</p>
+</blockquote>
+<p>以下就是一个来自官方文档，超级直观的例子</p>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> video = &#123;</span><br><span class="line">  play() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = video;</span><br></pre></td></tr></table></figure>
+
+<p>例子的测试</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> video = <span class="built_in">require</span>(<span class="string">"./video"</span>);</span><br><span class="line"></span><br><span class="line">test(<span class="string">"plays video"</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> spy = jest.spyOn(video, <span class="string">"play"</span>);</span><br><span class="line">  <span class="keyword">const</span> isPlaying = video.play();</span><br><span class="line"></span><br><span class="line">  expect(spy).toHaveBeenCalled();</span><br><span class="line">  expect(isPlaying).toBe(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">  spy.mockRestore();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="可能会被不小心忽略，出bug的地方"><a href="#可能会被不小心忽略，出bug的地方" class="headerlink" title="可能会被不小心忽略，出bug的地方"></a>可能会被不小心忽略，出bug的地方</h4><p>如果我们有好几次测试，都spyOn同一个function，如果每次开始测试前没有清除之前的测试的关联的话，可能会出错哦。</p>
+<p>比如我们expect这个function在这个test里面<code>.toHaveBeenCalledTimes(1)</code>, 被执行一次。</p>
+<p>如果之前测试也执行过一次，我们又没有重新设置mock的话，<code>toHaveBeenCalledTimes</code>就会是2次哦。</p>
+<p>可以用 <code>jest.resetAllMocks()</code> 来轻松解决。</p>
+<p>效果和在每一个test之前都加上<code>.mockReset()</code>是一样的。</p>
+<blockquote>
+<p>Resets the state of all mocks. Equivalent to calling .mockReset() on every mocked function. Returns the jest object for chaining.</p>
+</blockquote>
+<h4 id="以下来自官方文档"><a href="#以下来自官方文档" class="headerlink" title="以下来自官方文档"></a>以下来自官方文档</h4><p>Creates a mock function similar to jest.fn but also tracks calls to object[methodName]. Returns a Jest mock function.</p>
+<p>Note: By default, jest.spyOn also calls the spied method. This is different behavior from most other test libraries. If you want to overwrite the original function, you can use jest.spyOn(object, methodName).mockImplementation(() =&gt; customImplementation) or object[methodName] = jest.fn(() =&gt; customImplementation);</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">TDD, jest</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/07/2020-05-07-jest-spyon/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-05-07-test-display-none" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -877,94 +973,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/13/2020-04-13-dairy-agile-life/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2020-04-11-export-in-react" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/11/2020-04-11-export-in-react/">Export &amp; Import in React</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/11/2020-04-11-export-in-react/" class="archive-article-date">
-  	<time datetime="2020-04-10T21:12:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>We can often see:<br><code>export * from &#39;./Components&#39;;</code></p>
-<h3 id="What-does-mean"><a href="#What-does-mean" class="headerlink" title="What does * mean?"></a>What does * mean?</h3><blockquote>
-<p>A module can wrap one or more modules and combine all their exports using <code>export * from &#39;./Components&#39;;</code> syntax</p>
-</blockquote>
-<p>一般这句code放在Components同一个folder的index.ts里面。</p>
-<h5 id="这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index-ts里面的import就好，project里面所有其他地方的import都不需要改动。"><a href="#这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index-ts里面的import就好，project里面所有其他地方的import都不需要改动。" class="headerlink" title="这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改index.ts里面的import就好，project里面所有其他地方的import都不需要改动。"></a>这样引用的好处是：path就写到index这一层就可以了，当Component地址变化时，比如又给Component包裹一层folder，那只需要修改<code>index.ts</code>里面的import就好，project里面所有其他地方的import都不需要改动。</h5><p>当然也可以选择不用index.ts</p>
-<p>那么直接在Component想export的小部件里前面，加<code>export</code> 或 <code>default export</code> 就好.</p>
-<p>React Apps可以看作是可交互的小部件的集合，就好像乐高一样，我们把它搭建成一个成品。</p>
-<p>那么相同样子、用途的部件的重复使用是很重要的。我们常常把一些共用的部件放在另外的file里面，然后export出去，在需要的地方再import就可以啦。</p>
-<h3 id="import默认的export"><a href="#import默认的export" class="headerlink" title="import默认的export"></a>import默认的export</h3><p>每一个module可以声明最多一个default export。我们想引用时，只需要import它的地址就可以了。import的声明给它一个我们想要的名字。像这样 <code>import AnyNameYouLike from &#39;../../Components&#39;</code></p>
-<h3 id="import命名过的部件"><a href="#import命名过的部件" class="headerlink" title="import命名过的部件"></a>import命名过的部件</h3><p>每一个module可以export很多不同名字的部件。我们可以引用它的名字 <code>import { Header } from &#39;../../Components</code></p>
-<p>还可以重名成我们需要的名字 <code>import { Header as PageHeader } from &#39;../../Components</code></p>
-<h3 id="还可以一起引用"><a href="#还可以一起引用" class="headerlink" title="还可以一起引用"></a>还可以一起引用</h3><p> <code>import AnyNameYouLike， { Header } from &#39;../../Components&#39;</code></p>
-<hr>
-<p>React Apps can be seen as a collection of interactive components.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/11/2020-04-11-export-in-react/">展开全文 >></a>
         </p>
       
 
