@@ -164,6 +164,183 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-10-06-first-impression-saga" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/06/2020-10-06-first-impression-saga/">First impression of Saga</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/06/2020-10-06-first-impression-saga/" class="archive-article-date">
+  	<time datetime="2020-10-06T07:41:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>saga is a middleware that has some powerful functions.</p>
+<p>The way we use it:</p>
+<p>dispatchAction =&gt; saga =&gt; reducer</p>
+<p>The dispatched event will be caught by saga before reaching to reducer. So in the saga middleware, we can manipulate it in the way we want. We can block this action. We can “takeLatest” or “takeEvery”. “takeLatest” will only take the last action if there are several continous actions happening.</p>
+<p>We can also trigger calling to BFF or downstream in saga, and update the result to redux once the response is there.</p>
+<p><code>function*</code> is the syntax for generator function in saga. This is also my first time seeing it. Inside the function, by using <code>yield</code>, we can make sure the async function inside <code>function*</code> executing one by one. In this way, we make async functions running syncnizely.</p>
+<p>Inside it, we can use</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span>* <span class="title">getCustomerDetailSaga</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">yield</span> call(getCustomerDetail, customerId); <span class="comment">//the first argument is the function, the second argument is the parameter to pass into the function</span></span><br><span class="line">  <span class="keyword">yield</span> put(storeCustomerDetial(res)); <span class="comment">//dispatch the action to reducer, to save customerDetail to redux</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>* <span class="title">rootSaga</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> all([helloSaga(), getCustomerDetailSaga()]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/06/2020-10-06-first-impression-saga/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2020-10-06-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/06/2020-10-06-test/">2020-10-06-test</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/06/2020-10-06-test/" class="archive-article-date">
+  	<time datetime="2020-10-05T23:51:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最好的学习方法是自己做一个app出来，这样就不会忘记了。<br>日常工作中每一天都要记，不然以为自己记得，之后就忘记了。</p>
+<h2 id="eslint"><a href="#eslint" class="headerlink" title="eslint"></a>eslint</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    parser: <span class="string">'@typescropt-eslint/parser'</span>,</span><br><span class="line">    extens:[<span class="string">'plugin:react/recommended'</span>,</span><br><span class="line">    <span class="string">'plugin:jest-dom/recommended'</span>,</span><br><span class="line">    <span class="string">'plugin:@typescript-eslint/recommended'</span>,</span><br><span class="line">    <span class="string">'prettier/@typescript-eslint'</span></span><br><span class="line">    ],</span><br><span class="line">    parserOptions: &#123;</span><br><span class="line">        ...,</span><br><span class="line">        project: <span class="string">'./tsconfig.json'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    rules: &#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    settings: &#123;</span><br><span class="line">        react: &#123;</span><br><span class="line">            version: <span class="string">'detect'</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="initial-store"><a href="#initial-store" class="headerlink" title="initial store"></a>initial store</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">"redux"</span>;</span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">"redux-thunk"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> middleware: Middlware[] = [thunk];</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">setStore</span>(<span class="params">initialState = &#123;&#125;</span>): <span class="title">any</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createStore(rootReducer, initialState, applyMiddleware(...middleware));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="mock"><a href="#mock" class="headerlink" title="mock"></a>mock</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jest.mock(<span class="string">'uuid/v4'</span>, <span class="function"><span class="params">()</span> =&gt;</span> (): <span class="function"><span class="params">string</span> =&gt;</span> MOCK_UUID)</span><br><span class="line">jest.mock(<span class="string">'utils/log'</span>, <span class="function"><span class="params">()</span> =&gt;</span> (&#123;log: &#123;info: jest.fn()&#125;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  initalState = &#123;</span><br><span class="line">    pageReducer: &#123;</span><br><span class="line">      ...initalPageReducer,</span><br><span class="line">      currentPage: &#123; ...currentPage &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="render"><a href="#render" class="headerlink" title="render"></a>render</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">renderPageWithRedux</span> = (<span class="params">initialState, mockClient</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> store = setStore(initialState);</span><br><span class="line">    <span class="keyword">const</span> parrentElement = <span class="built_in">document</span>.body;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        ...render(</span><br><span class="line">            &lt;Container renderRoot=&#123;parentElement&#125;&gt;</span><br><span class="line">                &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">                    &lt;Page apolloClient=&#123;mockClient&#125;&gt;</span><br><span class="line">                &lt;<span class="regexp">/Provider&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Container&gt;</span><br><span class="line">        ),</span><br><span class="line">        store</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="test-dispatch-action"><a href="#test-dispatch-action" class="headerlink" title="test dispatch action"></a>test dispatch action</h3><p>diapacher is jest.fn. test what toHaveBeenCalledWith</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dispatcher;</span><br><span class="line"></span><br><span class="line">beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  dispatcher = jest.fn();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">it(<span class="string">"Should dispatch"</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  updateUserDetail(&#123; id: <span class="string">"ABC"</span>, name: <span class="string">"ABC"</span> &#125;)(diapatcher);</span><br><span class="line">  expect(dispatcher).toHaveBeenCalledWith(&#123;</span><br><span class="line">    <span class="keyword">type</span>: UPDATE_USER_DETAIL,</span><br><span class="line">    payload: &#123;</span><br><span class="line">      value: &#123;</span><br><span class="line">        id: <span class="string">"ABC"</span>,</span><br><span class="line">        name: <span class="string">"ABC"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="test-reducer"><a href="#test-reducer" class="headerlink" title="test reducer"></a>test reducer</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">it(<span class="string">"should update state"</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> initialState = &#123;</span><br><span class="line">    fooReducer: &#123; name: <span class="string">"ABC"</span> &#125;,</span><br><span class="line">    barReducer: &#123; name: <span class="string">"bar"</span> &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> action = updateUserDetailAction(userDetail);</span><br><span class="line">    expect(fooReducer(initialState, action).name).toEqual(expected);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h3><p>in index.ts, we will</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">'../User/userDetailReducer'</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> produce <span class="keyword">from</span> <span class="string">'immer'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">type</span> Builder&lt;T&gt; = <span class="function">(<span class="params">overrides?: Partial&lt;T&gt;</span>) =&gt;</span> T;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> buildUserDetailState: Builder&lt;UserDetailState&gt; = <span class="function">(<span class="params">overrides = &#123;&#125;</span>) =&gt;</span> (&#123;</span><br><span class="line">    isDetailLoaded: <span class="literal">true</span>,</span><br><span class="line">    detail: &#123;&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> initialState: UserDetailState = buildUserDetailState();</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> userDetailReducer: (</span><br><span class="line">    state: UserDetailState,</span><br><span class="line">    action: DispatchAction</span><br><span class="line">) =&gt; UserDetailState = produce(<span class="function">(<span class="params">draft = initialState, action: DispatchAction</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">        <span class="keyword">case</span> UPDATE_USER_DETAIL:</span><br><span class="line">            draft.detail = action.payload;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> draft;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> updateUserDetail = <span class="function">(<span class="params">userNumber: <span class="built_in">string</span>, detail: UserDetail</span>) =&gt;</span> <span class="keyword">async</span> dispatch =&gt; &#123;</span><br><span class="line">    dispatch(&#123;</span><br><span class="line">        <span class="keyword">type</span>: UPDATE_USER_DETAIL,</span><br><span class="line">        payload: &#123;</span><br><span class="line">            value: &#123;</span><br><span class="line">                userNumber,</span><br><span class="line">                userDetail: detail</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="test-apollo-graphQL-query"><a href="#test-apollo-graphQL-query" class="headerlink" title="test apollo graphQL query"></a>test apollo graphQL query</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getRequestedUrl = (): <span class="function"><span class="params">string</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fetchMock.mock.calls.length === <span class="number">0</span>? <span class="string">''</span>: fetchMock.mock.calls[<span class="number">0</span>][<span class="number">0</span>].url;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">it(<span class="string">'should return correct result'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    mockResponseOnce(getCustomerDetailResult);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> query(&#123;</span><br><span class="line">        query: GET_CUSTOMER_DETAIL,</span><br><span class="line">        variables: &#123;</span><br><span class="line">            query: &#123;userId: <span class="string">'ABC'</span>, userName: <span class="string">'EFG'</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    expect(getRequestedUrl()).toBe(expectedRequestUrl);</span><br><span class="line">    expect(getUrlQueryParams(getRequestedUrl())).toEqual(&#123;</span><br><span class="line">        userId:<span class="string">'ABC'</span>,</span><br><span class="line">        user: &#123;</span><br><span class="line">            userName: <span class="string">'EFG'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    expect(getHTTPMethodByIndex(<span class="number">0</span>)).toBe(<span class="string">'GET'</span>);</span><br><span class="line">    expect(res).toMatchSnapshot();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="test-a-component"><a href="#test-a-component" class="headerlink" title="test a component"></a>test a component</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render&#125; <span class="keyword">from</span> <span class="string">'@test-library/react'</span>;</span><br><span class="line"><span class="keyword">const</span> renderComponent = <span class="function">(<span class="params">component</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">return</span> render(&lt;&gt;&#123;component&#125;&lt;<span class="regexp">/&gt;)</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">'customize button'</span>, <span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> props;</span><br><span class="line">    beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        props = &#123;</span><br><span class="line">            title: <span class="string">'mock title'</span>,</span><br><span class="line">            description: <span class="string">'mock description'</span>,</span><br><span class="line">            selected: <span class="literal">false</span>,</span><br><span class="line">            onChange: jest.fn()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    it(<span class="string">'should render'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;container, getByText&#125; = renderComponent(&lt;CustomizeButon &#123;...props&#125;/&gt;);</span><br><span class="line">        expect(getByText(<span class="string">'Button'</span>)).toBeInTheDocument();</span><br><span class="line">        expect(container).toMatchSnapshot;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="web-url"><a href="#web-url" class="headerlink" title="web url"></a>web url</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">it(<span class="string">'should control feature toggle by url parameter'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.history.pushState(&#123;&#125;, <span class="string">''</span>, <span class="string">`/toggles=<span class="subst">$&#123;userToggle&#125;</span>`</span>);</span><br><span class="line">    expect(statusByQueryParams[userToggle]).toBe(<span class="literal">true</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="styled-component"><a href="#styled-component" class="headerlink" title="styled-component"></a>styled-component</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'styled-components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> customizedSection = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">    padding: <span class="subst">$&#123;(&#123; lib &#125;</span>) =&gt; lib.lg&#125; 3rem;</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="react-hook"><a href="#react-hook" class="headerlink" title="react hook"></a>react hook</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useDispatch, useSelector &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span>;</span><br><span class="line"><span class="keyword">const</span> UserDetailPage: React.FunctionComponent = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> dispatch = useDispatch();</span><br><span class="line">    <span class="keyword">const</span> &#123; userName &#125; = useSelector(<span class="function">(<span class="params">state</span>) =&gt;</span> state.userDetailReducer)</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;&gt;</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="redux-combine-reducer"><a href="#redux-combine-reducer" class="headerlink" title="redux - combine reducer"></a>redux - combine reducer</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;combineReducers&#125; <span class="keyword">from</span> <span class="string">'redux'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;userDetailReducer <span class="keyword">as</span> userDetailState&#125; <span class="keyword">from</span> <span class="string">'../reducers'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> RootState = ReturnType&lt;<span class="keyword">typeof</span> rootReducer&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> rootReducer = combineReducer(&#123;</span><br><span class="line">    userDetailState</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> buildRootState: Builder&lt;RootState&gt; = <span class="function">(<span class="params">overrides: &#123;&#125;</span>) =&gt;</span> (&#123;</span><br><span class="line">    userDetailState: buildUserDetailState(),</span><br><span class="line">    ...overrides</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/06/2020-10-06-test/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-10-02-console-log" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -525,6 +702,40 @@ An IAM user can belong to multiple groups =&gt; true</code></pre><h2 id="EC2-Ins
 </ul>
 <h3 id="on-demond"><a href="#on-demond" class="headerlink" title="on demond"></a>on demond</h3><h2 id="instance-type"><a href="#instance-type" class="headerlink" title="instance type"></a>instance type</h2><ul>
 <li>exam: will choose which type</li>
+</ul>
+<h2 id="Elastic-Network-Inerfaces-ENI"><a href="#Elastic-Network-Inerfaces-ENI" class="headerlink" title="Elastic Network Inerfaces (ENI)"></a>Elastic Network Inerfaces (ENI)</h2><ul>
+<li>logical component in a VPC that represents a virtual network card</li>
+<li>each ENI can have the following attributes:<ul>
+<li>primary private IPv4, one or more secondary IPv4</li>
+<li>one Elastic IP (IPv4) per private IPv4</li>
+<li>one Pulic IPv4</li>
+<li>one or more security groups</li>
+<li>A Mac address</li>
+</ul>
+</li>
+<li><strong>You can crete ENI independently and attach them on the fly (move them) on EC2 instances for failover</strong></li>
+<li>bound to specifc availability zone (AZ)</li>
+<li>can be moved</li>
+</ul>
+<h2 id="EC2-pricing"><a href="#EC2-pricing" class="headerlink" title="EC2 pricing"></a>EC2 pricing</h2><ul>
+<li>on-demend vs spot vs reserved vs dedicated host</li>
+<li>min 60 seconds</li>
+<li>you do not pay for the instance if it is stoped</li>
+</ul>
+<h2 id="AMI"><a href="#AMI" class="headerlink" title="AMI"></a>AMI</h2><ul>
+<li>an image to use to create our instances</li>
+<li>can be built for linux or windows machines</li>
+<li>AMI are built for a specifc AWS resign (!)</li>
+</ul>
+<h2 id="Burstable-Instances-T2"><a href="#Burstable-Instances-T2" class="headerlink" title="Burstable Instances (T2)"></a>Burstable Instances (T2)</h2><ul>
+<li>handle unexpected traffic</li>
+</ul>
+<h2 id="T2-Unlimited"><a href="#T2-Unlimited" class="headerlink" title="T2 Unlimited"></a>T2 Unlimited</h2><h2 id="EC2-checklist"><a href="#EC2-checklist" class="headerlink" title="EC2 - checklist (!)"></a>EC2 - checklist (!)</h2><ul>
+<li>know how to SSH into EC2 (and change .pem file permissions)</li>
+<li>know how to properly use security groups</li>
+<li>know the fundamental differences between private vs public vs elastic IP</li>
+<li>know how to use User Data to customize your instance at boot time</li>
+<li>know that your can build custom AMI to enhace your OS</li>
 </ul>
 
       
@@ -931,175 +1142,9 @@ An IAM user can belong to multiple groups =&gt; true</code></pre><h2 id="EC2-Ins
 
 
   
-    <article id="post-2020-05-09-contract-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/09/2020-05-09-contract-test/">Contract test 的一个方法</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/09/2020-05-09-contract-test/" class="archive-article-date">
-  	<time datetime="2020-05-08T22:17:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="什么是contract-test？"><a href="#什么是contract-test？" class="headerlink" title="什么是contract test？"></a>什么是contract test？</h2><p><img src="/2020/05/09/2020-05-09-contract-test/contract-testing-img.png" alt=""><br><a href="https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370" target="_blank" rel="noopener">reference: https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370</a></p>
-<p>Contract testing是一种确保两个系统可以兼容的一种测试方法，比如两个微服务之间。Contract记录了两个服务之间的互动，来确保两个系统都遵守了他们之间约定的合同。</p>
-<blockquote>
-<p>Contract testing is a methodology for ensuring that two separate systems (such as two microservices) are compatible with one other. It captures the interactions that are exchanged between each service, storing them in a contract, which can then be used to verify that both parties adhere to it.<br><a href="https://pactflow.io/blog/what-is-contract-testing/" target="_blank" rel="noopener">https://pactflow.io/blog/what-is-contract-testing/</a></p>
-</blockquote>
-<h2 id="听起来太抽象了？"><a href="#听起来太抽象了？" class="headerlink" title="听起来太抽象了？"></a>听起来太抽象了？</h2><p>其实就是比如一个别的组做的一个判断答案对错的API,答应我们组会返回给我们这样的结果</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"code"</span>: <span class="string">"100"</span>,</span><br><span class="line">    <span class="attr">"isSuccess"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"description"</span>: <span class="string">"Answers are correct"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们答应用他们的API的时候，发送这样的body</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"questionId"</span>: <span class="string">"101"</span>,</span><br><span class="line">    <span class="attr">"answer"</span>: <span class="string">"Yes"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>比如约定code是个string，那么就不能返回number给我们，也不能返回null，undefined给我们。</p>
-<p>我们答应answer是一个string，那么就不能发送boolean，或者number，或者null，undefined给他们。</p>
-<p>把这些约定都记录在contract里面，如果任何一方有新的deployment打破了之前的约定，我们就可以知道哪里和之前不一样了。或者有error的时候可以很快排查是否因为contract被破坏而产生，有助于解决bug。</p>
-<p>如果把contract test运行到pipeline上，设置一段时间自动运行一次，那么还可以提早知道，提供给我们服务的upstream，downstream是不是还和之前一样。反之一样，如果是API提供者，也可以测试自己每次改动升级是否还符合之前的contract。</p>
-<h2 id="分享其中一种用户驱动的contract-testing的一种方法-（customer-driven-contract-testing）"><a href="#分享其中一种用户驱动的contract-testing的一种方法-（customer-driven-contract-testing）" class="headerlink" title="分享其中一种用户驱动的contract testing的一种方法 （customer-driven contract testing）"></a>分享其中一种用户驱动的contract testing的一种方法 （customer-driven contract testing）</h2><p>有时候很难控制其他组是否进行contract testing，作为用这个API的组，我们依然可以只在我们这边做contract testing，也非常有帮助哦。</p>
-<p>方法有很多很多。</p>
-<p>这里具体的分享其中一种方法。</p>
-<p>用他 =&gt; <a href="https://www.npmjs.com/package/typescript-json-validator" target="_blank" rel="noopener">https://www.npmjs.com/package/typescript-json-validator</a></p>
-<p>定义这样的types在src/Example.ts里面</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">interface</span> ExampleType &#123;</span><br><span class="line">  value: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @TJS-format email</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  email?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @default 42</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  answer: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后可以轻松的生成validator哦</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx typescript-json-validator src&#x2F;Example.ts ExampleType</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以这样用这个validate function了哦</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;readFileSync&#125; <span class="keyword">from</span> <span class="string">'fs'</span>;</span><br><span class="line"><span class="keyword">import</span> validate <span class="keyword">from</span> <span class="string">'./Example.validator.ts'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> value: unknown = <span class="built_in">JSON</span>.parse(readFileSync(process.argv[<span class="number">2</span>], <span class="string">'utf8'</span>));</span><br><span class="line"> </span><br><span class="line"><span class="comment">// this will through a clear error if `value` is not of the</span></span><br><span class="line"><span class="comment">// correct type. It will also fill in any default values</span></span><br><span class="line"><span class="keyword">const</span> validatedValue = validate(value);</span><br><span class="line"> </span><br><span class="line"><span class="built_in">console</span>.log(validatedValue.value);</span><br></pre></td></tr></table></figure>
-
-<p>如果别人break了contract我们这边就有error msg，可以具体的告诉我们是那个parameter变啦或者错啦。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/09/2020-05-09-contract-test/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2020-05-07-regex" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/07/2020-05-07-regex/">正则表达式 regex</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/07/2020-05-07-regex/" class="archive-article-date">
-  	<time datetime="2020-05-07T11:09:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>^</code> 叫carrot, 是开始标记</p>
-<p><code>$</code> 是结束标记</p>
-<p><code>.</code> 任意单个字符，除了换行</p>
-<p><code>[1-9]</code> 这样就是1-9都可以</p>
-<p><code>[Ab]</code> 这样就是A可以，b也可以</p>
-<p>代表次数的朋友们：<br><code>*</code> 大于等于0次</p>
-<p><code>+</code> 大于等于1次</p>
-<p><code>?</code> 0次或者1次</p>
-<p>有用的他们：<br><code>\w</code> 匹配所有字母数字, 等同于 [a-zA-Z0-9_]</p>
-<p><code>\W</code> 匹配所有非字母数字, 即符号, 等同于: [^\w]</p>
-<p><code>\d</code> 匹配数字: [0-9]</p>
-<p><code>\D</code> 匹配非数字: [^\d]</p>
-<p>reference: [<a href="https://juejin.im/entry/5993b56f6fb9a0248f4a5f16]" target="_blank" rel="noopener">https://juejin.im/entry/5993b56f6fb9a0248f4a5f16]</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/07/2020-05-07-regex/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 

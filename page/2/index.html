@@ -164,6 +164,172 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2020-05-09-contract-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/09/2020-05-09-contract-test/">Contract test 的一个方法</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/09/2020-05-09-contract-test/" class="archive-article-date">
+  	<time datetime="2020-05-08T22:17:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是contract-test？"><a href="#什么是contract-test？" class="headerlink" title="什么是contract test？"></a>什么是contract test？</h2><p><img src="/2020/05/09/2020-05-09-contract-test/contract-testing-img.png" alt=""><br><a href="https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370" target="_blank" rel="noopener">reference: https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370</a></p>
+<p>Contract testing是一种确保两个系统可以兼容的一种测试方法，比如两个微服务之间。Contract记录了两个服务之间的互动，来确保两个系统都遵守了他们之间约定的合同。</p>
+<blockquote>
+<p>Contract testing is a methodology for ensuring that two separate systems (such as two microservices) are compatible with one other. It captures the interactions that are exchanged between each service, storing them in a contract, which can then be used to verify that both parties adhere to it.<br><a href="https://pactflow.io/blog/what-is-contract-testing/" target="_blank" rel="noopener">https://pactflow.io/blog/what-is-contract-testing/</a></p>
+</blockquote>
+<h2 id="听起来太抽象了？"><a href="#听起来太抽象了？" class="headerlink" title="听起来太抽象了？"></a>听起来太抽象了？</h2><p>其实就是比如一个别的组做的一个判断答案对错的API,答应我们组会返回给我们这样的结果</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"code"</span>: <span class="string">"100"</span>,</span><br><span class="line">    <span class="attr">"isSuccess"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"description"</span>: <span class="string">"Answers are correct"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们答应用他们的API的时候，发送这样的body</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"questionId"</span>: <span class="string">"101"</span>,</span><br><span class="line">    <span class="attr">"answer"</span>: <span class="string">"Yes"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如约定code是个string，那么就不能返回number给我们，也不能返回null，undefined给我们。</p>
+<p>我们答应answer是一个string，那么就不能发送boolean，或者number，或者null，undefined给他们。</p>
+<p>把这些约定都记录在contract里面，如果任何一方有新的deployment打破了之前的约定，我们就可以知道哪里和之前不一样了。或者有error的时候可以很快排查是否因为contract被破坏而产生，有助于解决bug。</p>
+<p>如果把contract test运行到pipeline上，设置一段时间自动运行一次，那么还可以提早知道，提供给我们服务的upstream，downstream是不是还和之前一样。反之一样，如果是API提供者，也可以测试自己每次改动升级是否还符合之前的contract。</p>
+<h2 id="分享其中一种用户驱动的contract-testing的一种方法-（customer-driven-contract-testing）"><a href="#分享其中一种用户驱动的contract-testing的一种方法-（customer-driven-contract-testing）" class="headerlink" title="分享其中一种用户驱动的contract testing的一种方法 （customer-driven contract testing）"></a>分享其中一种用户驱动的contract testing的一种方法 （customer-driven contract testing）</h2><p>有时候很难控制其他组是否进行contract testing，作为用这个API的组，我们依然可以只在我们这边做contract testing，也非常有帮助哦。</p>
+<p>方法有很多很多。</p>
+<p>这里具体的分享其中一种方法。</p>
+<p>用他 =&gt; <a href="https://www.npmjs.com/package/typescript-json-validator" target="_blank" rel="noopener">https://www.npmjs.com/package/typescript-json-validator</a></p>
+<p>定义这样的types在src/Example.ts里面</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">interface</span> ExampleType &#123;</span><br><span class="line">  value: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @TJS-format email</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  email?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @default 42</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  answer: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后可以轻松的生成validator哦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx typescript-json-validator src&#x2F;Example.ts ExampleType</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以这样用这个validate function了哦</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;readFileSync&#125; <span class="keyword">from</span> <span class="string">'fs'</span>;</span><br><span class="line"><span class="keyword">import</span> validate <span class="keyword">from</span> <span class="string">'./Example.validator.ts'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> value: unknown = <span class="built_in">JSON</span>.parse(readFileSync(process.argv[<span class="number">2</span>], <span class="string">'utf8'</span>));</span><br><span class="line"> </span><br><span class="line"><span class="comment">// this will through a clear error if `value` is not of the</span></span><br><span class="line"><span class="comment">// correct type. It will also fill in any default values</span></span><br><span class="line"><span class="keyword">const</span> validatedValue = validate(value);</span><br><span class="line"> </span><br><span class="line"><span class="built_in">console</span>.log(validatedValue.value);</span><br></pre></td></tr></table></figure>
+
+<p>如果别人break了contract我们这边就有error msg，可以具体的告诉我们是那个parameter变啦或者错啦。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/09/2020-05-09-contract-test/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2020-05-07-regex" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/07/2020-05-07-regex/">正则表达式 regex</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/07/2020-05-07-regex/" class="archive-article-date">
+  	<time datetime="2020-05-07T11:09:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>^</code> 叫carrot, 是开始标记</p>
+<p><code>$</code> 是结束标记</p>
+<p><code>.</code> 任意单个字符，除了换行</p>
+<p><code>[1-9]</code> 这样就是1-9都可以</p>
+<p><code>[Ab]</code> 这样就是A可以，b也可以</p>
+<p>代表次数的朋友们：<br><code>*</code> 大于等于0次</p>
+<p><code>+</code> 大于等于1次</p>
+<p><code>?</code> 0次或者1次</p>
+<p>有用的他们：<br><code>\w</code> 匹配所有字母数字, 等同于 [a-zA-Z0-9_]</p>
+<p><code>\W</code> 匹配所有非字母数字, 即符号, 等同于: [^\w]</p>
+<p><code>\d</code> 匹配数字: [0-9]</p>
+<p><code>\D</code> 匹配非数字: [^\d]</p>
+<p>reference: [<a href="https://juejin.im/entry/5993b56f6fb9a0248f4a5f16]" target="_blank" rel="noopener">https://juejin.im/entry/5993b56f6fb9a0248f4a5f16]</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/07/2020-05-07-regex/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2020-05-07-jest-spyon" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -842,169 +1008,9 @@
 
 
   
-    <article id="post-2020-04-19-js-execution-context" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/19/2020-04-19-js-execution-context/">关于JavaScript你可能没仔细思考过的概念 -- Execution Contexts, Hoisting, Scopes, Closures</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/19/2020-04-19-js-execution-context/" class="archive-article-date">
-  	<time datetime="2020-04-19T04:56:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>Execution Contexts</code> 可执行上下文。</p>
-<blockquote>
-<p>Memory Leak 内存泄漏时不再使用、用不到、访问不到的变量，依然占据着内存空间，不能再次利用起来，造成内存的浪费。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/19/2020-04-19-js-execution-context/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2020-04-13-dairy-agile-life" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/13/2020-04-13-dairy-agile-life/">Agile生活</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/13/2020-04-13-dairy-agile-life/" class="archive-article-date">
-  	<time datetime="2020-04-12T22:29:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在项目开发中，我们经常使用到Agile管理方法。通常以2周作为一个sprint，在sprint planning中规划这两周作为团队可以完成多少的工作量。在开sprint planning会之前，项目中已经被BA（business analyst）分成很多小任务，每个小任务代表一个或几个小小的user story。比如这样，<code>GIVEN</code>: 我在登陆页面上面，<code>WHEN</code>: 当我没有填写用户名和密码，并且当我点击登陆按钮时，<code>THEN</code>: 然后我会在登陆按钮上方看到“用户名或密码错误”的提示。</p>
-<p>每个任务又叫做card/ticket.会议中，团队里面每个人同时根据复杂度，为这个任务打分。一般有1、2、3、5、8、13分，但通常8分、13分很少见，因为分数太大就需要把user story再拆分一下，拆分成2张卡。</p>
-<p>根据之前sprint的经验，会算出平均一个团队一个sprint可以完成多少分。比如可以完成30分，那么就根据任务的优先级（priority），选择一些任务使总分在30分左右，比如2+2+3+5+3+1+1+3 = 30.</p>
-<p>在每个sprint结束的时候，还会有一个sprint review会议，总结这两周做的怎么样，问这样的三个问题：</p>
-<ul>
-<li>什么做的好？</li>
-<li>什么做的不太好，未来可能造成风险？</li>
-<li>什么事情不确定是好还是不好？</li>
-</ul>
-<h4 id="说了这么多项目管理中的Agile，那为什么题目叫做Agile生活呢？"><a href="#说了这么多项目管理中的Agile，那为什么题目叫做Agile生活呢？" class="headerlink" title="说了这么多项目管理中的Agile，那为什么题目叫做Agile生活呢？"></a>说了这么多项目管理中的Agile，那为什么题目叫做Agile生活呢？</h4><p>我觉得规划项目，管理项目的方法，也可以应用到我们的生活、效率管理中。周末的时候，有整整两天属于我们的空白休息时间。之前的我，有时候没有提前规划，两天很快就不知不觉流逝了，也没有感受到好好的休息，或者想做的事情太多了，最后一些比较重要的事情也没有完成。我觉得提前规划周末，或者任何假期都是一个很好的方法。我们可以借鉴Agile的思路。</p>
-<ol>
-<li>在纸上写下想做的事情，任何事情都可以，越具体越好。</li>
-<li>然后按照重要程度，和想做这件事的程度，为这些事情大概排序。</li>
-<li>然后在每个事情旁边写下做它大概需要多久，比如30分钟、2小时等等，估计时为自己留出余量（buffer）</li>
-<li>周末除去睡觉会有32小时的事情，那么就用我们想做的事情填满这32小时吧！</li>
-</ol>
-<h4 id="别忘了还可以经常总结反思自己最近过得怎么样"><a href="#别忘了还可以经常总结反思自己最近过得怎么样" class="headerlink" title="别忘了还可以经常总结反思自己最近过得怎么样"></a>别忘了还可以经常总结反思自己最近过得怎么样</h4><p>问自己这样几个问题</p>
-<ul>
-<li><p>What went well? </p>
-<p>  什么做得好？</p>
-</li>
-<li><p>What didn’t go well? </p>
-<p>  什么做得不太好</p>
-</li>
-<li><p>What can I improve on? </p>
-<p>  什么是我可以提升的？</p>
-</li>
-<li><p>What works? </p>
-<p>  什么方法对我行之有效，使我变得更好、更开心了？</p>
-</li>
-</ul>
-<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><p>使用这样的规划方法之后，我就知道假期那天可以做什么，不会错过我想做的事情。要做的和做完的事情被记录下来，我觉得每天更丰富了。似乎活出生命的广度，就是基于每一天的丰富吧。一些困难的事情如果做完了，会很有成就感，觉得自己真的很棒。希望这样的方法也对你有启发！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/13/2020-04-13-dairy-agile-life/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
