@@ -273,7 +273,7 @@
 <p>Inside it, we can use</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span>* <span class="title">getCustomerDetailSaga</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">yield</span> call(getCustomerDetail, customerId); <span class="comment">//the first argument is the function, the second argument is the parameter to pass into the function</span></span><br><span class="line">  <span class="keyword">yield</span> put(storeCustomerDetial(res)); <span class="comment">//dispatch the action to reducer, to save customerDetail to redux</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>* <span class="title">rootSaga</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> all([helloSaga(), getCustomerDetailSaga()]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<p>It is so funny that redux sage uses words like <code>yield</code>, <code>call</code>, <code>put</code>, the creater must be someone who loves investment. LOL</p>
 
       
 
